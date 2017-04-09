@@ -6,12 +6,31 @@
 
 - Install `nvm` - node version manager
 - Install `node` version 6
-- Install `react-create-app` globally using `npm` (or `yarn`)
+- Install `create-react-app` globally using `npm` (or `yarn`)
 - Scaffold your new app: https://facebook.github.io/react/docs/installation.html
 - Edit `src/App.js` in your favorite editor
 
 ### Set up the static site
-- Using the mockup in https://facebook.github.io/react/docs/thinking-in-react.html, build this in HTML statically
+- Using the mockup in https://facebook.github.io/react/docs/thinking-in-react.html, build this in HTML statically. You can use this as a helpful starting-place:
+
+```html
+<div>
+  <input placeholder="Search..."/>
+  <p><input type='checkbox'/>Only show products in stock</p>
+  <table>
+    <thead>
+      <tr><td>Name</td><td>Price</td></tr>
+    </thead>
+    <tbody>
+      <tr><td colSpan={2}>Sporting Goods</td></tr>
+      <tr><td>football</td><td>$49.99</td></tr>
+      <tr><td colSpan={2}>Electronics</td></tr>
+      <tr><td>ipad</td><td>$399.99</td></tr>
+    </tbody>
+  </table>
+</div>
+```
+
 - Convert the static HTML into various components
  - SearchBox
  - ProductLine
