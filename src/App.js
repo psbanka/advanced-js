@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './App.css'
 import SearchBox from './SearchBox'
 
@@ -84,7 +84,11 @@ class ProductData extends Component {
     inStock: React.PropTypes.bool
   }
 
-  render () {
+  /**
+   * thing
+   *
+   */
+  _generateTableGuts () {
     let tableGuts = []
     let categories = []
     this.props.catalog.forEach((catalogEntry) => {
@@ -113,7 +117,11 @@ class ProductData extends Component {
         }
       })
     })
+    return tableGuts
+  }
 
+  render () {
+    const tableGuts = this._generateTableGuts()
     return (
       <tbody>
         {tableGuts}

@@ -1,10 +1,11 @@
+/**
+ * This is a module that provides the top-level search-box
+ */
+
 import React, { Component } from 'react'
+import './SearchBox.css'
 
 export default class SearchBox extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   static propTypes = {
     searchTerm: React.PropTypes.string,
     inStock: React.PropTypes.bool,
@@ -16,7 +17,8 @@ export default class SearchBox extends Component {
     const textChangeCallback = this.props.onFilterTextInput.bind(this)
     const checkboxChangeCallback = this.props.onFilterCheckBoxInput.bind(this)
     return (
-      <div>
+      <div className='SearchBox'>
+        <button style={{color: 'red'}}>Confirm</button>
         <input
           type='text'
           onChange={textChangeCallback}

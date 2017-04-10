@@ -9,6 +9,9 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
     "react-scripts": "0.9.5",
     "standard": "^10.0.1",
     "standard-flow": "^1.0.0"
@@ -18,8 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/standard",
-    "lint-fix": "./node_modules/.bin/standard --fix"
+    "lint": "./node_modules/.bin/eslint src",
+    "lint-fix": "./node_modules/.bin/eslint src --fix"
   },
   "standard": {
     "parser": "babel-eslint"
