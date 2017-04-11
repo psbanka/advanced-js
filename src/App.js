@@ -3,12 +3,12 @@ import './App.css'
 import SearchBox from './SearchBox'
 
 const SERVER_DATA = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
+  {category: 'Sporting Goods', price: 49.99, stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: 9.99, stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: 29.99, stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: 99.99, stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: 399.99, stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
 ]
 
 class App extends Component {
@@ -16,16 +16,45 @@ class App extends Component {
     super(props)
     this.state = {
       searchTerm: '',
-      inStock: false
+      inStock: false,
+      isBuying: {},
+      total: 0
     }
   }
+
+  /*
+   * isBuying = {
+   *   'Sporting GoodsBasketball': true,
+   *   'ElectronicsNexus 7': true
+   * }
+   */
 
   onFilterTextInput (e) {
     this.setState({searchTerm: e.target.value})
   }
 
   onFilterCheckBoxInput (e) {
-    this.setState({inStock: e.target.value === 'on'})
+    this.setState({inStock: e.target.checked})
+  }
+
+  /**
+   * a user has clicked a row
+   * @param key {String} - combination of category and name to uniquely
+   *   identify a row
+   * @param value {bool} - selected or not
+   * @param price {Number} - how much it costs
+   */
+  onIsBuying(key, value, price) {
+    let newTotal
+    if (value) {
+      newTotal = this.state.total + price
+    } else {
+      newTotal = this.state.total - price
+    }
+
+    // Hey! if you want a variable as a key, put it in brackets!
+    let newBuyObject = Object.assign(this.state.isBuying, {[key]: value})
+    this.setState({isBuying: newBuyObject, total: newTotal})
   }
 
   render () {
@@ -41,7 +70,10 @@ class App extends Component {
           catalog={SERVER_DATA}
           searchTerm={this.state.searchTerm}
           inStock={this.state.inStock}
+          isBuying={this.state.isBuying}
+          onIsBuying={this.onIsBuying.bind(this)}
         />
+        <p>{this.state.total}</p>
       </div>
     )
   }
@@ -51,7 +83,9 @@ class ProductLine extends Component {
   static propTypes = {
     catalog: React.PropTypes.array,
     searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool
+    inStock: React.PropTypes.bool,
+    isBuying: React.PropTypes.object,
+    onIsBuying: React.PropTypes.func
   }
 
   render () {
@@ -61,7 +95,10 @@ class ProductLine extends Component {
         <ProductData
           searchTerm={this.props.searchTerm}
           inStock={this.props.inStock}
-          catalog={this.props.catalog} />
+          catalog={this.props.catalog}
+          isBuying={this.props.isBuying}
+          onIsBuying={this.props.onIsBuying}
+        />
       </table>
     )
   }
@@ -81,15 +118,13 @@ class ProductData extends Component {
   static propTypes = {
     catalog: React.PropTypes.array,
     searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool
+    inStock: React.PropTypes.bool,
+    isBuying: React.PropTypes.object,
+    onIsBuying: React.PropTypes.func
   }
 
-  /**
-   * thing
-   *
-   */
   _generateTableGuts () {
-    let tableGuts = []
+    let tableRow = []
     let categories = []
     this.props.catalog.forEach((catalogEntry) => {
       const newItem = categories.indexOf(catalogEntry.category) === -1
@@ -98,35 +133,86 @@ class ProductData extends Component {
       }
     })
 
-    categories.forEach((category) => {
-      let key
-      tableGuts.push(<tr key={category}><td colSpan='2'><strong>{category}</strong></td></tr>)
+    categories.forEach((currentCategory) => {
+      tableRow.push(
+        <tr key={currentCategory}>
+          <td colSpan='2'><strong>{currentCategory}</strong></td>
+        </tr>
+      )
       this.props.catalog.forEach((catalogEntry) => {
-        const filterMatch = catalogEntry.name.indexOf(this.props.searchTerm) !== -1
-        let style = {color: 'black'}
-        if (category === catalogEntry.category) {
-          if (!catalogEntry.stocked) {
-            style.color = 'red'
-          }
-          key = `${category}${catalogEntry.name}`
-          if (!this.props.inStock || catalogEntry.stocked) {
-            if (filterMatch) {
-              tableGuts.push(<tr key={key}><td style={style}>{catalogEntry.name}</td><td>{catalogEntry.price}</td></tr>)
-            }
-          }
-        }
+        let key = `${currentCategory}${catalogEntry.name}`
+        tableRow.push(
+          <ProductRow
+            key={key}
+            {...catalogEntry}
+            currentCategory={currentCategory}
+            searchTerm={this.props.searchTerm}
+            inStock={this.props.inStock}
+            isBuying={this.props.isBuying}
+            onIsBuying={this.props.onIsBuying}
+          />
+        )
+
       })
     })
-    return tableGuts
+    return tableRow
   }
 
   render () {
-    const tableGuts = this._generateTableGuts()
+    const tableRow = this._generateTableGuts()
     return (
       <tbody>
-        {tableGuts}
+        {tableRow}
       </tbody>
     )
+  }
+}
+
+class ProductRow extends Component {
+  static propTypes = {
+    name: React.PropTypes.string,
+    category: React.PropTypes.string,
+    stocked: React.PropTypes.bool,
+    price: React.PropTypes.number,
+    currentCategory: React.PropTypes.string,
+    searchTerm: React.PropTypes.string,
+    inStock: React.PropTypes.bool,
+    isBuying: React.PropTypes.object,
+    onIsBuying: React.PropTypes.func
+  }
+
+  handleOnIsBuying (e) {
+    const value = e.target.checked
+    let key = `${this.props.currentCategory}${this.props.name}`
+    this.props.onIsBuying(key, value, this.props.price)
+  }
+
+  render () {
+    const filterMatch = this.props.name.indexOf(this.props.searchTerm) !== -1
+    let style = {color: 'black'}
+    if (this.props.currentCategory === this.props.category) {
+      if (!this.props.stocked) {
+        style.color = 'red'
+      }
+      let key = `${this.props.currentCategory}${this.props.name}`
+      let amIChecked = this.props.isBuying[key] || false
+      if (!this.props.inStock || this.props.stocked) {
+        if (filterMatch) {
+          return(
+            <tr>
+              <td style={style}>
+                <input
+                  checked={amIChecked} type="checkbox"
+                  onChange={this.handleOnIsBuying.bind(this)}
+               />{this.props.name}
+              </td>
+              <td>${this.props.price}</td>
+            </tr>
+          )
+        }
+      }
+    }
+    return null
   }
 }
 
