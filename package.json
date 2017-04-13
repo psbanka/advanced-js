@@ -17,8 +17,6 @@
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint src --fix"
   },
-  "scripts": {
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vjwilson/enzyme-example-jest"
