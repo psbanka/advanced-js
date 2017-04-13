@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './App.css'
+// import './App.css'
 import SearchBox from './SearchBox'
 
 const SERVER_DATA = [
@@ -80,14 +80,6 @@ class App extends Component {
 }
 
 class ProductLine extends Component {
-  static propTypes = {
-    catalog: React.PropTypes.array,
-    searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool,
-    isBuying: React.PropTypes.object,
-    onIsBuying: React.PropTypes.func
-  }
-
   render () {
     return (
       <table>
@@ -115,13 +107,6 @@ class ProductHeadline extends Component {
 }
 
 class ProductData extends Component {
-  static propTypes = {
-    catalog: React.PropTypes.array,
-    searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool,
-    isBuying: React.PropTypes.object,
-    onIsBuying: React.PropTypes.func
-  }
 
   _generateTableGuts () {
     let tableRow = []
@@ -169,17 +154,6 @@ class ProductData extends Component {
 }
 
 class ProductRow extends Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-    category: React.PropTypes.string,
-    stocked: React.PropTypes.bool,
-    price: React.PropTypes.number,
-    currentCategory: React.PropTypes.string,
-    searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool,
-    isBuying: React.PropTypes.object,
-    onIsBuying: React.PropTypes.func
-  }
 
   handleOnIsBuying (e) {
     const value = e.target.checked

@@ -3,15 +3,9 @@
  */
 
 import React, { Component } from 'react'
-import './SearchBox.css'
+// import './SearchBox.css'
 
 export default class SearchBox extends Component {
-  static propTypes = {
-    searchTerm: React.PropTypes.string,
-    inStock: React.PropTypes.bool,
-    onFilterTextInput: React.PropTypes.func,
-    onFilterCheckBoxInput: React.PropTypes.func
-  }
 
   render () {
     const textChangeCallback = this.props.onFilterTextInput.bind(this)
