@@ -18,8 +18,6 @@ it('will render the right number of table rows', () => {
 
 it('will render fewer rows when filtering on in-stock items', () => {
   const app = mount(<App/>)
-  console.log('clicking change button')
-  app.find('#in-stock-checkbox').simulate('click')
-  console.log(app.state())
+  app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
   expect(app.find('tr').length).toBe(7)
 })
