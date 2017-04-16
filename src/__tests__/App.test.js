@@ -15,3 +15,11 @@ it('will render the right number of table rows', () => {
   const wrapper = mount(<App/>)
   expect(wrapper.find('tr').length).toBe(9)
 })
+
+it('will render fewer rows when filtering on in-stock items', () => {
+  const app = mount(<App/>)
+  console.log('clicking change button')
+  app.find('#in-stock-checkbox').simulate('click')
+  console.log(app.state())
+  expect(app.find('tr').length).toBe(7)
+})

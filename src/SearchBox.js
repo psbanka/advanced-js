@@ -20,9 +20,11 @@ export default class SearchBox extends Component {
           value={this.props.searchTerm} />
         <p>
           <input
-            onChange={checkboxChangeCallback}
+            id='in-stock-checkbox'
+            onClick={checkboxChangeCallback}
             checked={this.props.inStock}
-            type='checkbox' />Only show products in stock
+            type='checkbox' />
+          Only show products in stock
         </p>
       </div>
     )

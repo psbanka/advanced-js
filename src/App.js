@@ -34,7 +34,10 @@ class App extends Component {
   }
 
   onFilterCheckBoxInput (e) {
+    console.log('before changing:', this.state.inStock)
+    console.log('changing to:', e.target.checked)
     this.setState({inStock: e.target.checked})
+    console.log('after changing')
   }
 
   /**
