@@ -11,6 +11,18 @@ const SERVER_DATA = [
   {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
 ]
 
+/**
+ * converts category and name to a valid key string
+ * @param {String} category - the name of the category
+ * @param {String} name - the name of the string
+ * @returns {String} - valid HTML id
+ */
+function makeKey(category, name) {
+  const convertedCategory = category.toLowerCase().replace(/ /g, '-')
+  const convertedName = name.toLowerCase().replace(/ /g, '-')
+  return `${convertedCategory}-${convertedName}`
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -73,7 +85,7 @@ class App extends Component {
           isBuying={this.state.isBuying}
           onIsBuying={this.onIsBuying.bind(this)}
         />
-        <p>{this.state.total}</p>
+        <p id='total-box'>{this.state.total}</p>
       </div>
     )
   }
@@ -168,7 +180,7 @@ class ProductRow extends Component {
       if (!this.props.stocked) {
         style.color = 'red'
       }
-      let key = `${this.props.currentCategory}${this.props.name}`
+      let key = makeKey(this.props.currentCategory, this.props.name)
       let amIChecked = this.props.isBuying[key] || false
       if (!this.props.inStock || this.props.stocked) {
         if (filterMatch) {
@@ -176,6 +188,7 @@ class ProductRow extends Component {
             <tr>
               <td style={style}>
                 <input
+                  id={key}
                   checked={amIChecked} type="checkbox"
                   onChange={this.handleOnIsBuying.bind(this)}
                />{this.props.name}

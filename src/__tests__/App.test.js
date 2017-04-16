@@ -39,4 +39,34 @@ describe('integration test', () => {
       expect(app.find('tr').length).toBe(5)
     })
   })
+
+  describe('checking product items', () => {
+    let app
+
+    beforeEach(() => {
+      app = mount(<App/>)
+    })
+
+    it('renders zero when unchecked', () => {
+      expect(app.find('#total-box').text()).toBe('0')
+    })
+
+    it('puts the correct value when clicking once on iPhone', () => {
+      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
+      expect(app.find('#total-box').text()).toBe('399.99')
+    })
+
+    it('puts the correct value when clicking twice on iPhone', () => {
+      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
+      app.find('#electronics-iphone-5').simulate('change', {target: {checked: false}})
+      expect(app.find('#total-box').text()).toBe('0')
+    })
+
+    it('adds values together properly', () => {
+      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
+      app.find('#sporting-goods-basketball').simulate('change', {target: {checked: true}})
+      expect(app.find('#total-box').text()).toBe('429.98')
+    })
+  })
+
 })
