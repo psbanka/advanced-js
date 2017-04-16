@@ -14,6 +14,7 @@ export default class SearchBox extends Component {
       <div className='SearchBox'>
         <button style={{color: 'red'}}>Confirm</button>
         <input
+          id='in-stock-textbox'
           type='text'
           onChange={textChangeCallback}
           placeholder='Search...'

@@ -4,20 +4,39 @@ import App from '../App'
 import { shallow, mount, render } from 'enzyme'
 
 
-/* global it */
+/* global it describe */
 
-it('renders without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<App />, div)
-})
+describe('integration test', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div')
+    ReactDOM.render(<App />, div)
+  })
 
-it('will render the right number of table rows', () => {
-  const wrapper = mount(<App/>)
-  expect(wrapper.find('tr').length).toBe(9)
-})
+  describe('when filtering products', () => {
+    let app
 
-it('will render fewer rows when filtering on in-stock items', () => {
-  const app = mount(<App/>)
-  app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
-  expect(app.find('tr').length).toBe(7)
+    beforeEach(() => {
+      app = mount(<App/>)
+    })
+
+    it('will render the right number of table rows without filtering', () => {
+      expect(app.find('tr').length).toBe(9)
+    })
+
+    it('will render fewer rows when filtering on in-stock items', () => {
+      app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
+      expect(app.find('tr').length).toBe(7)
+    })
+
+    it('will properly filter inventory when typing in the search box', () => {
+      app.find('#in-stock-textbox').simulate('change', {target: {value: 'ball'}})
+      expect(app.find('tr').length).toBe(6)
+    })
+
+    it('will properly filter inventory when typing and checking stock', () => {
+      app.find('#in-stock-textbox').simulate('change', {target: {value: 'ball'}})
+      app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
+      expect(app.find('tr').length).toBe(5)
+    })
+  })
 })
