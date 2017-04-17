@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import App from '../App'
 import { shallow, mount, render } from 'enzyme'
 
-
 /* global it describe */
 
 describe('integration test', () => {

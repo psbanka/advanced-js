@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-// import './App.css'
+import './App.css'
 import SearchBox from './SearchBox'
 
 const SERVER_DATA = [

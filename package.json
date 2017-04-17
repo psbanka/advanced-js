@@ -41,6 +41,7 @@
     "enzyme": "^2.0.0",
     "jest": "15.1.1",
     "jest-cli": "15.1.1",
+    "jest-css-modules": "^1.1.0",
     "react": "^0.14.7",
     "react-addons-test-utils": "^0.14.7"
   },
@@ -48,5 +49,12 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-scripts": "^0.9.5"
+  },
+  "jest": {
+    "scriptPreprocessor": "./node_modules/jest-css-modules",
+    "moduleNameMapper": {
+      "/Users/pbanka/play/tir-react/\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "/Users/pbanka/play/tir-react/__mocks__/styleMock.js"
+    }
   }
 }
