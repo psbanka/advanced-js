@@ -185,7 +185,7 @@ class ProductRow extends Component {
       if (!this.props.inStock || this.props.stocked) {
         if (filterMatch) {
           return(
-            <tr>
+            <tr className="product">
               <td style={style}>
                 <input
                   id={key}

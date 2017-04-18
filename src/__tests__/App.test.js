@@ -19,23 +19,23 @@ describe('integration test', () => {
     })
 
     it('will render the right number of table rows without filtering', () => {
-      expect(app.find('tr').length).toBe(9)
+      expect(app.find('.product').length).toBe(6)
     })
 
     it('will render fewer rows when filtering on in-stock items', () => {
       app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
-      expect(app.find('tr').length).toBe(7)
+      expect(app.find('.product').length).toBe(4)
     })
 
     it('will properly filter inventory when typing in the search box', () => {
       app.find('#in-stock-textbox').simulate('change', {target: {value: 'ball'}})
-      expect(app.find('tr').length).toBe(6)
+      expect(app.find('.product').length).toBe(3)
     })
 
     it('will properly filter inventory when typing and checking stock', () => {
       app.find('#in-stock-textbox').simulate('change', {target: {value: 'ball'}})
       app.find('#in-stock-checkbox').simulate('click', {target: {checked: true}})
-      expect(app.find('tr').length).toBe(5)
+      expect(app.find('.product').length).toBe(2)
     })
   })
 
