@@ -17,7 +17,7 @@ const SERVER_DATA = [
  * @param {String} name - the name of the string
  * @returns {String} - valid HTML id
  */
-function makeKey(category, name) {
+export function makeKey(category, name) {
   const convertedCategory = category.toLowerCase().replace(/ /g, '-')
   const convertedName = name.toLowerCase().replace(/ /g, '-')
   return `${convertedCategory}-${convertedName}`
