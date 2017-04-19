@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBox SearchBox snapshot check 1`] = `
+<div
+  className="SearchBox"
+>
+  <button
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Confirm
+  </button>
+  <input
+    id="in-stock-textbox"
+    onChange={[Function]}
+    placeholder="Search..."
+    type="text"
+    value={undefined}
+  />
+  <p>
+    <input
+      checked={undefined}
+      id="in-stock-checkbox"
+      onClick={[Function]}
+      type="checkbox"
+    />
+    Only show products in stock
+  </p>
+</div>
+`;

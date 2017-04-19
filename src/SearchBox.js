@@ -6,7 +6,6 @@ import React, { Component } from 'react'
 import './SearchBox.css'
 
 export default class SearchBox extends Component {
-
   render () {
     const textChangeCallback = this.props.onFilterTextInput.bind(this)
     const checkboxChangeCallback = this.props.onFilterCheckBoxInput.bind(this)
