@@ -1,21 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App, {makeKey} from '../App'
+import App from '../App'
 import { shallow, mount, render } from 'enzyme'
 import renderer from 'react-test-renderer';
 
 /* global it describe */
 
-/*
-describe('makeKey', () => {
-  it('can make a key', () => {
-    let output = makeKey('foo', 'bar')
-    expect(output).toEqual('foo-bar')
-  })
-})
-*/
-
 describe('App', () => {
+  it('snapshot check', () => {
+    const component = renderer.create(<App />)
+    const json = component.toJSON()
+    expect(json).toMatchSnapshot()
+  })
+
   describe('onIsBuying', () => {
     let app, wrapper
 

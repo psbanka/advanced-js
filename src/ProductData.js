@@ -21,17 +21,19 @@ export default class ProductData extends Component {
       )
       this.props.catalog.forEach((catalogEntry) => {
         let key = `${currentCategory}${catalogEntry.name}`
-        tableRow.push(
-          <ProductRow
-            key={key}
-            {...catalogEntry}
-            currentCategory={currentCategory}
-            searchTerm={this.props.searchTerm}
-            inStock={this.props.inStock}
-            isBuying={this.props.isBuying}
-            onIsBuying={this.props.onIsBuying}
-          />
-        )
+        if (currentCategory === catalogEntry.category) {
+          tableRow.push(
+            <ProductRow
+              key={key}
+              {...catalogEntry}
+              currentCategory={currentCategory}
+              searchTerm={this.props.searchTerm}
+              inStock={this.props.inStock}
+              isBuying={this.props.isBuying}
+              onIsBuying={this.props.onIsBuying}
+            />
+          )
+        }
 
       })
     })

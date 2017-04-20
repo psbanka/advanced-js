@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import SearchBox from '../SearchBox'
 import { shallow, mount, render } from 'enzyme'
-import renderer from 'react-test-renderer';
+import renderer from 'react-test-renderer'
 
 /* global it describe */
 

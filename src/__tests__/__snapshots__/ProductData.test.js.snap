@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductData snapshot check 1`] = `
+<tbody>
+  <tr>
+    <td
+      colSpan="2"
+    >
+      <strong>
+        things
+      </strong>
+    </td>
+  </tr>
+  <tr
+    className="product"
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    <td>
+      <input
+        checked={false}
+        id="things-bigthing"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      bigThing
+    </td>
+    <td>
+      $
+      99.99
+    </td>
+  </tr>
+  <tr
+    className="product"
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    <td>
+      <input
+        checked={false}
+        id="things-littlething"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      littleThing
+    </td>
+    <td>
+      $
+      9.99
+    </td>
+  </tr>
+  <tr>
+    <td
+      colSpan="2"
+    >
+      <strong>
+        stuff
+      </strong>
+    </td>
+  </tr>
+  <tr
+    className="product"
+    style={
+      Object {
+        "color": "black",
+      }
+    }
+  >
+    <td>
+      <input
+        checked={false}
+        id="stuff-junkything"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      junkyThing
+    </td>
+    <td>
+      $
+      1.99
+    </td>
+  </tr>
+</tbody>
+`;
