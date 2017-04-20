@@ -1,4 +1,4 @@
-# Getting started
+# Week 1/2: Fundamentals of React
 
 ## Basic work
 
@@ -76,3 +76,126 @@ Use the JSON data to dynamically build your table:
  - https://react-bootstrap.github.io/components.html
 - Research JSDoc (http://usejsdoc.org/). Add docblocks to each function with `@param` and `@returns` parameters for each.
 - Add lint checking to your system: research `standard.js` and integrate lint checking into your editor!
+
+# Week 3: Testing
+
+## Basic work
+
+### Set up Integration testing with enzyme and jest. 
+
+1. Set up your `package.json` file according to https://raw.githubusercontent.com/psbanka/advanced-js/wk3-8/unit-testing-complete/package.json
+2. remove your `node_modules` directory
+3. install `yarn` globally with `npm install -g yarn`
+4. Set up your `yarn.lock` file according to https://raw.githubusercontent.com/psbanka/advanced-js/master/yarn.lock
+5. Perform a `yarn` command and install all your dependencies.
+
+### Write a basic integration test for your App
+
+- in the `/src` directory, create a subdirectory `__tests__`
+- Create `integration.test.js` in the `__tests__` directory
+- In that module, import your testing dependencies:
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from '../App'
+import { mount } from 'enzyme'
+```
+- Create your first test using `describe`, `it, `beforeEach`
+
+```
+describe('integration test', () => {
+  describe('when filtering products', () => {
+    let app
+
+    beforeEach(() => {
+      app = mount(<App/>)
+    })
+
+    it('will render the right number of table rows without filtering', () => {
+      expect(app.find('.product').length).toBe(6)
+    })
+  })
+})
+```
+- Find other ways you can test your app:
+-- selecting the in-stock filter
+-- selecting filter text
+-- checking product rows (multiple times)
+-- etc!
+
+### Write a unit-test for `App.js`
+
+- Create `App.test.js` module in the `__test__` directory.
+- Example unit-test:
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from '../App'
+import { shallow } from 'enzyme'
+
+describe('App', () => {
+  describe('onIsBuying', () => {
+    let app, wrapper
+
+    beforeEach(() => {
+      wrapper = shallow(<App/>)
+      app = wrapper.instance()
+    })
+
+    it('properly increments price', () => {
+      app.onIsBuying('product1', true, 299.99)
+      const expected = {product1: true}
+      expect(app.state.isBuying).toEqual(expected)
+      expect(app.state.total).toEqual(299.99)
+    })
+  })
+})
+```
+
+- See how we are doing a different kind of testing here? We are no longer detecting complex interactions between components.
+- Mock function-calls with `jest.fn()` and examine how they are called instead of detecting complex interactions, e.g.:
+
+```javascript
+describe('SearchBox', () => {
+  let onFilterTextInput
+  let onFilterCheckBoxInput
+
+  beforeEach(() => {
+    onFilterTextInput = jest.fn()
+    onFilterCheckBoxInput = jest.fn()
+  })
+
+  it('will make proper callback when adding search text', () => {
+    const searchBox = shallow(
+      <SearchBox
+        onFilterTextInput={onFilterTextInput}
+        onFilterCheckBoxInput={onFilterCheckBoxInput}
+      />
+    )
+    const textBox = searchBox.find('#in-stock-textbox')
+    const event = {target: {value: 'ball'}}
+    textBox.simulate('change', event)
+    expect(onFilterTextInput).toBeCalledWith(event)
+  })
+})
+```
+
+## Advanced work
+
+- experiment with `react-test-renderer` to create test snapshots:
+
+``` javascript
+  it('SearchBox snapshot check', () => {
+    const component = renderer.create(
+      <SearchBox
+        onFilterTextInput={onFilterTextInput}
+        onFilterCheckBoxInput={onFilterCheckBoxInput}
+      />
+    )
+    const json = component.toJSON()
+    expect(json).toMatchSnapshot()
+  })
+```
+
+- experiment with `node_modules/.bin/jest --coverage` to try to get 100% test coverage!
