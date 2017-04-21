@@ -7,10 +7,30 @@ import renderer from 'react-test-renderer';
 /* global it describe */
 
 describe('App', () => {
-  it('snapshot check', () => {
+  it('does a snapshot check', () => {
     const component = renderer.create(<App />)
     const json = component.toJSON()
     expect(json).toMatchSnapshot()
+  })
+
+  describe('callbacks', () => {
+    let wrapper, app
+
+    beforeEach(() => {
+      wrapper = shallow(<App/>)
+      app = wrapper.instance()
+    })
+
+    it('performs onFilterTextInput', () => {
+      app.onFilterTextInput({target: {value: 'cheese'}})
+      expect(wrapper.getState().searchTerm).toBe('cheese')
+    })
+
+    it('performs onFilterCheckboxInput', () => {
+      app.onFilterCheckboxInput({target: {checked: true}})
+      expect(wrapper.getState().inStock).toBe(true)
+    })
+
   })
 
   describe('onIsBuying', () => {

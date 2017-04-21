@@ -13,7 +13,7 @@ const CATALOG = [
 ]
 
 describe('ProductData', () => {
-  it('snapshot check', () => {
+  it('does a snapshot check', () => {
     const component = renderer.create(
       <ProductData
         catalog={CATALOG}

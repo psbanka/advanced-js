@@ -14,7 +14,7 @@ describe('makeKey', () => {
 })
 
 describe('ProductRow', () => {
-  it('snapshot check', () => {
+  it('does a snapshot check', () => {
     const component = renderer.create(
       <ProductRow
         currentCategory='electronics'

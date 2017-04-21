@@ -15,7 +15,7 @@ describe('SearchBox', () => {
     onFilterCheckBoxInput = jest.fn()
   })
 
-  it('SearchBox snapshot check', () => {
+  it('does a snapshot check', () => {
     const component = renderer.create(
       <SearchBox
         onFilterTextInput={onFilterTextInput}
