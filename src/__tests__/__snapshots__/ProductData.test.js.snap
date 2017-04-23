@@ -1,11 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
 exports[`ProductData does a snapshot check 1`] = `
 <tbody>
   <tr>
     <td
-      colSpan="2"
-    >
+      colSpan="2">
       <strong>
         things
       </strong>
@@ -17,15 +14,13 @@ exports[`ProductData does a snapshot check 1`] = `
       Object {
         "color": "red",
       }
-    }
-  >
+    }>
     <td>
       <input
         checked={false}
         id="things-bigthing"
         onChange={[Function]}
-        type="checkbox"
-      />
+        type="checkbox" />
       bigThing
     </td>
     <td>
@@ -39,15 +34,13 @@ exports[`ProductData does a snapshot check 1`] = `
       Object {
         "color": "black",
       }
-    }
-  >
+    }>
     <td>
       <input
         checked={false}
         id="things-littlething"
         onChange={[Function]}
-        type="checkbox"
-      />
+        type="checkbox" />
       littleThing
     </td>
     <td>
@@ -57,8 +50,7 @@ exports[`ProductData does a snapshot check 1`] = `
   </tr>
   <tr>
     <td
-      colSpan="2"
-    >
+      colSpan="2">
       <strong>
         stuff
       </strong>
@@ -70,15 +62,13 @@ exports[`ProductData does a snapshot check 1`] = `
       Object {
         "color": "black",
       }
-    }
-  >
+    }>
     <td>
       <input
         checked={false}
         id="stuff-junkything"
         onChange={[Function]}
-        type="checkbox"
-      />
+        type="checkbox" />
       junkyThing
     </td>
     <td>

@@ -1,16 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
 exports[`SearchBox does a snapshot check 1`] = `
 <div
-  className="SearchBox"
->
+  className="SearchBox">
   <button
     style={
       Object {
         "color": "red",
       }
-    }
-  >
+    }>
     Confirm
   </button>
   <input
@@ -18,15 +14,13 @@ exports[`SearchBox does a snapshot check 1`] = `
     onChange={[Function]}
     placeholder="Search..."
     type="text"
-    value={undefined}
-  />
+    value={undefined} />
   <p>
     <input
       checked={undefined}
       id="in-stock-checkbox"
       onClick={[Function]}
-      type="checkbox"
-    />
+      type="checkbox" />
     Only show products in stock
   </p>
 </div>
