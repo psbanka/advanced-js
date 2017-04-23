@@ -1,17 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
 exports[`App does a snapshot check 1`] = `
 <div>
   <div
-    className="SearchBox"
-  >
+    className="SearchBox">
     <button
       style={
         Object {
           "color": "red",
         }
-      }
-    >
+      }>
       Confirm
     </button>
     <input
@@ -19,15 +15,13 @@ exports[`App does a snapshot check 1`] = `
       onChange={[Function]}
       placeholder="Search..."
       type="text"
-      value=""
-    />
+      value="" />
     <p>
       <input
         checked={false}
         id="in-stock-checkbox"
         onClick={[Function]}
-        type="checkbox"
-      />
+        type="checkbox" />
       Only show products in stock
     </p>
   </div>
@@ -45,8 +39,7 @@ exports[`App does a snapshot check 1`] = `
     <tbody>
       <tr>
         <td
-          colSpan="2"
-        >
+          colSpan="2">
           <strong>
             Sporting Goods
           </strong>
@@ -58,15 +51,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "black",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="sporting-goods-football"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           Football
         </td>
         <td>
@@ -80,15 +71,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "black",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="sporting-goods-baseball"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           Baseball
         </td>
         <td>
@@ -102,15 +91,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "red",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="sporting-goods-basketball"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           Basketball
         </td>
         <td>
@@ -120,8 +107,7 @@ exports[`App does a snapshot check 1`] = `
       </tr>
       <tr>
         <td
-          colSpan="2"
-        >
+          colSpan="2">
           <strong>
             Electronics
           </strong>
@@ -133,15 +119,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "black",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="electronics-ipod-touch"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           iPod Touch
         </td>
         <td>
@@ -155,15 +139,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "red",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="electronics-iphone-5"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           iPhone 5
         </td>
         <td>
@@ -177,15 +159,13 @@ exports[`App does a snapshot check 1`] = `
           Object {
             "color": "black",
           }
-        }
-      >
+        }>
         <td>
           <input
             checked={false}
             id="electronics-nexus-7"
             onChange={[Function]}
-            type="checkbox"
-          />
+            type="checkbox" />
           Nexus 7
         </td>
         <td>
@@ -196,211 +176,7 @@ exports[`App does a snapshot check 1`] = `
     </tbody>
   </table>
   <p
-    id="total-box"
-  >
-    0
-  </p>
-</div>
-`;
-
-exports[`App snapshot check 1`] = `
-<div>
-  <div
-    className="SearchBox"
-  >
-    <button
-      style={
-        Object {
-          "color": "red",
-        }
-      }
-    >
-      Confirm
-    </button>
-    <input
-      id="in-stock-textbox"
-      onChange={[Function]}
-      placeholder="Search..."
-      type="text"
-      value=""
-    />
-    <p>
-      <input
-        checked={false}
-        id="in-stock-checkbox"
-        onClick={[Function]}
-        type="checkbox"
-      />
-      Only show products in stock
-    </p>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <td>
-          Name
-        </td>
-        <td>
-          Price
-        </td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td
-          colSpan="2"
-        >
-          <strong>
-            Sporting Goods
-          </strong>
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "black",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="sporting-goods-football"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          Football
-        </td>
-        <td>
-          $
-          49.99
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "black",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="sporting-goods-baseball"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          Baseball
-        </td>
-        <td>
-          $
-          9.99
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "red",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="sporting-goods-basketball"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          Basketball
-        </td>
-        <td>
-          $
-          29.99
-        </td>
-      </tr>
-      <tr>
-        <td
-          colSpan="2"
-        >
-          <strong>
-            Electronics
-          </strong>
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "black",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="electronics-ipod-touch"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          iPod Touch
-        </td>
-        <td>
-          $
-          99.99
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "red",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="electronics-iphone-5"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          iPhone 5
-        </td>
-        <td>
-          $
-          399.99
-        </td>
-      </tr>
-      <tr
-        className="product"
-        style={
-          Object {
-            "color": "black",
-          }
-        }
-      >
-        <td>
-          <input
-            checked={false}
-            id="electronics-nexus-7"
-            onChange={[Function]}
-            type="checkbox"
-          />
-          Nexus 7
-        </td>
-        <td>
-          $
-          199.99
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <p
-    id="total-box"
-  >
+    id="total-box">
     0
   </p>
 </div>

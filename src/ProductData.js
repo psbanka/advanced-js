@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import ProductRow from './ProductRow'
+import PropTypes from 'prop-types'
 
 export default class ProductData extends Component {
-
   _generateTableGuts () {
     let tableRow = []
     let categories = []
@@ -34,7 +34,6 @@ export default class ProductData extends Component {
             />
           )
         }
-
       })
     })
     return tableRow
@@ -50,4 +49,10 @@ export default class ProductData extends Component {
   }
 }
 
-
+ProductData.propTypes = {
+  catalog: PropTypes.array,
+  searchTerm: PropTypes.string,
+  inStock: PropTypes.bool,
+  isBuying: PropTypes.object,
+  onIsBuying: PropTypes.func
+}

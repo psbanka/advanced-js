@@ -1,10 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import ProductRow, {makeKey} from '../ProductRow'
-import { shallow, mount, render } from 'enzyme'
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 
-/* gloabl it describe */
+/* global it describe expect jest */
 
 describe('makeKey', () => {
   it('can make a key', () => {
@@ -21,11 +20,11 @@ describe('ProductRow', () => {
         category='electronics'
         name='iphone 6'
         price={121}
-        stocked={true}
-        inStock={true}
+        stocked
+        inStock
         isBuying={{}}
         searchTerm=''
-        onIsBuying={{}}
+        onIsBuying={jest.fn()}
       />
     )
     const json = component.toJSON()
@@ -41,8 +40,8 @@ describe('ProductRow', () => {
           category='electronics'
           name='iphone 6'
           price={121}
-          stocked={true}
-          inStock={true}
+          stocked
+          inStock
           isBuying={{}}
           searchTerm=''
           onIsBuying={callback}
@@ -63,8 +62,8 @@ describe('ProductRow', () => {
           category='electronics'
           name='iphone 6'
           price={121}
-          stocked={true}
-          inStock={true}
+          stocked
+          inStock
           isBuying={{}}
           searchTerm=''
           onIsBuying={callback}
@@ -83,11 +82,11 @@ describe('ProductRow', () => {
           category='electronics'
           name='iphone 6'
           price={121}
-          stocked={true}
-          inStock={true}
+          stocked
+          inStock
           isBuying={{}}
           searchTerm='foo'
-          onIsBuying={{}}
+          onIsBuying={jest.fn()}
         />
       )
       const inputObject = wrapper.find('input')
@@ -102,10 +101,10 @@ describe('ProductRow', () => {
           name='iphone 6'
           price={121}
           stocked={false}
-          inStock={true}
+          inStock
           isBuying={{}}
           searchTerm=''
-          onIsBuying={{}}
+          onIsBuying={jest.fn()}
         />
       )
       const inputObject = wrapper.find('input')
@@ -123,7 +122,7 @@ describe('ProductRow', () => {
           inStock={false}
           isBuying={{}}
           searchTerm=''
-          onIsBuying={{}}
+          onIsBuying={jest.fn()}
         />
       )
       const inputObject = wrapper.find('.product')
@@ -137,11 +136,11 @@ describe('ProductRow', () => {
           category='electronics'
           name='iphone 6'
           price={121}
-          stocked={true}
+          stocked
           inStock={false}
           isBuying={{}}
           searchTerm=''
-          onIsBuying={{}}
+          onIsBuying={jest.fn()}
         />
       )
       const inputObject = wrapper.find('.product')

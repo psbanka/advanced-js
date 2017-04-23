@@ -21,6 +21,9 @@ class App extends Component {
       isBuying: {},
       total: 0
     }
+    this.onFilterTextInput = this.onFilterTextInput.bind(this)
+    this.onFilterCheckBoxInput = this.onFilterCheckBoxInput.bind(this)
+    this.onIsBuying = this.onIsBuying.bind(this)
   }
 
   /*
@@ -45,7 +48,7 @@ class App extends Component {
    * @param value {bool} - selected or not
    * @param price {Number} - how much it costs
    */
-  onIsBuying(key, value, price) {
+  onIsBuying (key, value, price) {
     let newTotal
     if (value) {
       newTotal = this.state.total + price
@@ -64,15 +67,15 @@ class App extends Component {
         <SearchBox
           searchTerm={this.state.searchTerm}
           inStock={this.state.inStock}
-          onFilterTextInput={this.onFilterTextInput.bind(this)}
-          onFilterCheckBoxInput={this.onFilterCheckBoxInput.bind(this)}
+          onFilterTextInput={this.onFilterTextInput}
+          onFilterCheckBoxInput={this.onFilterCheckBoxInput}
         />
         <ProductLine
           catalog={SERVER_DATA}
           searchTerm={this.state.searchTerm}
           inStock={this.state.inStock}
           isBuying={this.state.isBuying}
-          onIsBuying={this.onIsBuying.bind(this)}
+          onIsBuying={this.onIsBuying}
         />
         <p id='total-box'>{this.state.total}</p>
       </div>

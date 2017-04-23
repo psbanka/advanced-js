@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
-import { shallow, mount, render } from 'enzyme'
+import { mount } from 'enzyme'
 
-/* global it describe */
+/* global it describe expect beforeEach */
 
 describe('integration test', () => {
   it('renders without crashing', () => {
@@ -15,7 +15,7 @@ describe('integration test', () => {
     let app
 
     beforeEach(() => {
-      app = mount(<App/>)
+      app = mount(<App />)
     })
 
     it('will render the right number of table rows without filtering', () => {
@@ -43,7 +43,7 @@ describe('integration test', () => {
     let app
 
     beforeEach(() => {
-      app = mount(<App/>)
+      app = mount(<App />)
     })
 
     it('renders zero when unchecked', () => {
@@ -67,5 +67,4 @@ describe('integration test', () => {
       expect(app.find('#total-box').text()).toBe('429.98')
     })
   })
-
 })

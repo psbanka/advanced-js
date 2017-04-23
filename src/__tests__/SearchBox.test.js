@@ -1,10 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import SearchBox from '../SearchBox'
-import { shallow, mount, render } from 'enzyme'
+import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 
-/* global it describe */
+/* global it describe expect beforeEach jest */
 
 describe('SearchBox', () => {
   let onFilterTextInput
