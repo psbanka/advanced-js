@@ -1,10 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import ProductData from '../ProductData'
-import { shallow, mount, render } from 'enzyme'
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 
-/* global it describe */
+/* global it describe expect */
 
 const CATALOG = [
   {category: 'things', 'price': 99.99, stocked: false, name: 'bigThing'},

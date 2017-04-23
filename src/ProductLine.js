@@ -1,7 +1,9 @@
 import React from 'react'
-const {Component} = React
 import ProductHeadline from './ProductHeadline'
 import ProductData from './ProductData'
+import PropTypes from 'prop-types'
+
+const {Component} = React
 
 export default class ProductLine extends Component {
   render () {
@@ -20,3 +22,10 @@ export default class ProductLine extends Component {
   }
 }
 
+ProductLine.propTypes = {
+  catalog: PropTypes.object,
+  searchTerm: PropTypes.string,
+  inStock: PropTypes.bool,
+  isBuying: PropTypes.object,
+  onIsBuying: PropTypes.func
+}

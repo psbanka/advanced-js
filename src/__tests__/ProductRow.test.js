@@ -1,10 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import ProductRow, {makeKey} from '../ProductRow'
-import { shallow, mount, render } from 'enzyme'
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 
-/* gloabl it describe */
+/* global it describe expect jest */
 
 describe('makeKey', () => {
   it('can make a key', () => {
