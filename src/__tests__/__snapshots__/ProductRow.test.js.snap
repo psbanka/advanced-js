@@ -24,28 +24,3 @@ exports[`ProductRow does a snapshot check 1`] = `
   </td>
 </tr>
 `;
-
-exports[`ProductRow snapshot check 1`] = `
-<tr
-  className="product"
-  style={
-    Object {
-      "color": "black",
-    }
-  }
->
-  <td>
-    <input
-      checked={false}
-      id="electronics-iphone-6"
-      onChange={[Function]}
-      type="checkbox"
-    />
-    iphone 6
-  </td>
-  <td>
-    $
-    121
-  </td>
-</tr>
-`;
