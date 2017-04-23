@@ -3,7 +3,7 @@ import ProductData from '../ProductData'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 
-/* global it describe expect */
+/* global it describe expect jest */
 
 const CATALOG = [
   {category: 'things', 'price': 99.99, stocked: false, name: 'bigThing'},
@@ -19,7 +19,7 @@ describe('ProductData', () => {
         searchTerm=''
         inStock={false}
         isBuying={{}}
-        onIsBuying={{}}
+        onIsBuying={jest.fn()}
       />
     )
     const json = component.toJSON()
@@ -33,7 +33,7 @@ describe('ProductData', () => {
         searchTerm=''
         inStock={false}
         isBuying={{}}
-        onIsBuying={{}}
+        onIsBuying={jest.fn()}
       />
     )
     const output = wrapper.instance()._generateTableGuts()

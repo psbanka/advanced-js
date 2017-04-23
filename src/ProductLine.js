@@ -23,7 +23,7 @@ export default class ProductLine extends Component {
 }
 
 ProductLine.propTypes = {
-  catalog: PropTypes.object,
+  catalog: PropTypes.array,
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,

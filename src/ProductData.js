@@ -50,7 +50,7 @@ export default class ProductData extends Component {
 }
 
 ProductData.propTypes = {
-  catalog: PropTypes.object,
+  catalog: PropTypes.array,
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
