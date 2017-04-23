@@ -23,12 +23,12 @@ describe('App', () => {
 
     it('performs onFilterTextInput', () => {
       app.onFilterTextInput({target: {value: 'cheese'}})
-      expect(wrapper.getState().searchTerm).toBe('cheese')
+      expect(wrapper.state().searchTerm).toBe('cheese')
     })
 
     it('performs onFilterCheckboxInput', () => {
-      app.onFilterCheckboxInput({target: {checked: true}})
-      expect(wrapper.getState().inStock).toBe(true)
+      app.onFilterCheckBoxInput({target: {checked: true}})
+      expect(wrapper.state().inStock).toBe(true)
     })
 
   })
