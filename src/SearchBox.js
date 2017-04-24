@@ -2,6 +2,7 @@
  * This is a module that provides the top-level search-box
  */
 
+import {Panel, FormGroup, FormControl, Checkbox} from 'react-bootstrap'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './SearchBox.css'
@@ -15,23 +16,28 @@ export default class SearchBox extends Component {
 
   render () {
     return (
-      <div className='SearchBox'>
-        <button style={{color: 'red'}}>Confirm</button>
-        <input
-          id='in-stock-textbox'
-          type='text'
-          onChange={this.textChangeCallback}
-          placeholder='Search...'
-          value={this.props.searchTerm} />
-        <p>
-          <input
-            id='in-stock-checkbox'
-            onClick={this.checkboxChangeCallback}
-            checked={this.props.inStock}
-            type='checkbox' />
-          Only show products in stock
-        </p>
-      </div>
+      <Panel className='SearchBox'>
+        <form>
+          <FormGroup>
+            <FormControl
+              id='in-stock-textbox'
+              type='text'
+              onChange={this.textChangeCallback}
+              placeholder='Search...'
+              value={this.props.searchTerm} />
+            <p>
+              <Checkbox
+                id='in-stock-checkbox'
+                onClick={this.checkboxChangeCallback}
+                checked={this.props.inStock}
+                type='checkbox'
+              >
+                Only show products in stock
+              </Checkbox>
+            </p>
+          </FormGroup>
+        </form>
+      </Panel>
     )
   }
 }

@@ -1,27 +1,36 @@
 exports[`SearchBox does a snapshot check 1`] = `
 <div
-  className="SearchBox">
-  <button
-    style={
-      Object {
-        "color": "red",
-      }
-    }>
-    Confirm
-  </button>
-  <input
-    id="in-stock-textbox"
-    onChange={[Function]}
-    placeholder="Search..."
-    type="text"
-    value={undefined} />
-  <p>
-    <input
-      checked={undefined}
-      id="in-stock-checkbox"
-      onClick={[Function]}
-      type="checkbox" />
-    Only show products in stock
-  </p>
+  className="SearchBox panel panel-default"
+  id={undefined}>
+  <div
+    className="panel-body">
+    <form>
+      <div
+        className="form-group">
+        <input
+          className="form-control"
+          id="in-stock-textbox"
+          onChange={[Function]}
+          placeholder="Search..."
+          type="text"
+          value={undefined} />
+        <p>
+          <div
+            className="checkbox"
+            style={undefined}>
+            <label>
+              <input
+                checked={undefined}
+                disabled={false}
+                id="in-stock-checkbox"
+                onClick={[Function]}
+                type="checkbox" />
+              Only show products in stock
+            </label>
+          </div>
+        </p>
+      </div>
+    </form>
+  </div>
 </div>
 `;
