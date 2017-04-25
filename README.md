@@ -1,3 +1,5 @@
+![travis build](https://travis-ci.org/psbanka/advanced-js.svg?branch=master)
+
 # Week 1/2: Fundamentals of React
 
 ## Basic work
@@ -199,3 +201,85 @@ describe('SearchBox', () => {
 ```
 
 - experiment with `node_modules/.bin/jest --coverage` to try to get 100% test coverage!
+
+# Week 4-1: Getting professional
+
+## Set up Continuous Integration with Travis
+
+- Set up an account with Travis.org using your github account
+- Set up `.travis.yml` as follows:
+```yaml
+language: node_js
+node_js:
+  - 6
+"before_script": [yarn]
+cache: yarn
+scripts: {
+  "test": "yarn test"
+}
+```
+- set up `NewUser.txt` with your github account
+- make sure you have `yarn` installed as a dependency to your project (`npm install --save-dev yarn`)
+- perform a pull-request against your repository and make sure Travis performs a build for you and that it passes.
+
+## Set up standard-js in your project
+
+- Standard-js will ensure that your codebase is of the highest quality.
+- set up the dependencies in your project:
+```
+npm install --save-dev eslint-config-standard eslint-config-standard-react eslint-plugin-promise eslint-plugin-react eslint-plugin-standard eslint-plugin-node eslint
+```
+
+- Have eslint fix all the "obvious" errors in your project with `./node_modules/.bin/eslint src --fix`
+- Update your `package.json` file to have eslint run as part of the test:
+```javascript
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "./node_modules/.bin/eslint src && react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint src"
+  }
+```
+- Fix all of your linting errors. Some of them will not be very obvious. Here are a few tips:
+-- `yarn add prop-types` and add prop-type checking back to your classes:
+```javascript
+import PropTypes from 'prop-types'
+
+...
+
+SearchBox.propTypes = {
+  inStock: PropTypes.bool,
+  searchTerm: PropTypes.string,
+  onFilterCheckBoxInput: PropTypes.func,
+  onFilterTextInput: PropTypes.func
+}
+
+```
+
+-- move all of your `.bind()` methods to your constructors, as follows:
+```javascript
+  constructor (props) {
+    super(props)
+    this.textChangeCallback = this.props.onFilterTextInput.bind(this)
+    this.checkboxChangeCallback = this.props.onFilterCheckBoxInput.bind(this)
+  }
+```
+
+-- your tests use a few globals, such as `describe`, `it`, and `beforeEach`. Any module that uses a global must have a globals comment. For example
+
+```javascript
+/* globals describe beforeEach it */
+```
+
+
+Once all your code is passing lint and unit-testing, push your code back up to github and ensure that Travis is still passing your build.
+
+### Advanced work
+
+- Add a build badge to your `README.md` file, such as:
+
+```markdown
+![travis build](https://travis-ci.org/<YOUR_GITHUB_USERNAME>/<THE_NAME_OF_YOUR_PROJECT}.svg?branch=master)
+
+```
