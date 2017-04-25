@@ -1,4 +1,5 @@
 ![travis build](https://travis-ci.org/psbanka/advanced-js.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/psbanka/advanced-js/badge.svg?branch=master)](https://coveralls.io/github/psbanka/advanced-js?branch=master)
 
 # Week 1/2: Fundamentals of React
 
