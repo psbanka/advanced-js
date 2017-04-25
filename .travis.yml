@@ -3,7 +3,7 @@ node_js:
   - 6
 "before_script": [yarn]
 after_success:
-  - ./node_modules/.bin/codecov -e TRAVIS_NODE_VERSION
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 cache: yarn
 scripts: {
   "test": "yarn test"
