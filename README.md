@@ -204,6 +204,8 @@ describe('SearchBox', () => {
 
 # Week 4-1: Getting professional
 
+A professional development environment employs high standards for code quality, and an integral part of any professional development shop is reviewing pull-requests and setting up and maintaining a Continuous Integration system. We will be configuring our repositories to automatically build when code is pushed to github, and we will make sure that the build system hold our code to high standards by running all unit tests and ensuring that lint rules pass.
+
 ## Set up Continuous Integration with Travis
 
 - Set up an account with Travis.org using your github account

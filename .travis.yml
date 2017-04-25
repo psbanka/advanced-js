@@ -2,6 +2,8 @@ language: node_js
 node_js:
   - 6
 "before_script": [yarn]
+after_success:
+  - ./node_modules/.bin/codecov -e TRAVIS_NODE_VERSION
 cache: yarn
 scripts: {
   "test": "yarn test"
