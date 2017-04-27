@@ -5,6 +5,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './SearchBox.css'
+import TextField from 'material-ui/TextField'
+import Checkbox from 'material-ui/Checkbox'
 
 export default class SearchBox extends Component {
   constructor (props) {
@@ -15,22 +17,19 @@ export default class SearchBox extends Component {
 
   render () {
     return (
-      <div className='SearchBox'>
-        <button style={{color: 'red'}}>Confirm</button>
-        <input
-          id='in-stock-textbox'
-          type='text'
+      <div>
+        <TextField
+          hintText='Search...'
+          floatingLabelText='Search for a product'
           onChange={this.textChangeCallback}
-          placeholder='Search...'
-          value={this.props.searchTerm} />
-        <p>
-          <input
-            id='in-stock-checkbox'
-            onClick={this.checkboxChangeCallback}
-            checked={this.props.inStock}
-            type='checkbox' />
-          Only show products in stock
-        </p>
+          value={this.props.searchTerm}
+        />
+        <Checkbox
+          label='Only show products in stock'
+          id='in-stock-checkbox'
+          onClick={this.checkboxChangeCallback}
+          checked={this.props.inStock}
+        />
       </div>
     )
   }

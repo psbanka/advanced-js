@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {TableRow, TableRowColumn} from 'material-ui/Table'
 
 /**
  * converts category and name to a valid key string
@@ -36,16 +37,16 @@ export default class ProductRow extends Component {
     if (!this.props.inStock || this.props.stocked) {
       if (filterMatch) {
         return (
-          <tr className='product' style={style}>
-            <td>
+          <TableRow className='product' style={style}>
+            <TableRowColumn>
               <input
                 id={key}
                 checked={amIChecked} type='checkbox'
                 onChange={this.handleOnIsBuying}
              />{this.props.name}
-            </td>
-            <td>${this.props.price}</td>
-          </tr>
+            </TableRowColumn>
+            <TableRowColumn>${this.props.price}</TableRowColumn>
+          </TableRow>
         )
       }
     }

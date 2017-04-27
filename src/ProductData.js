@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ProductRow from './ProductRow'
 import PropTypes from 'prop-types'
+import {TableBody, TableRow, TableRowColumn} from 'material-ui/Table'
 
 export default class ProductData extends Component {
   _generateTableGuts () {
@@ -15,9 +16,9 @@ export default class ProductData extends Component {
 
     categories.forEach((currentCategory) => {
       tableRow.push(
-        <tr key={currentCategory}>
-          <td colSpan='2'><strong>{currentCategory}</strong></td>
-        </tr>
+        <TableRow key={currentCategory}>
+          <TableRowColumn colSpan='2'><strong>{currentCategory}</strong></TableRowColumn>
+        </TableRow>
       )
       this.props.catalog.forEach((catalogEntry) => {
         let key = `${currentCategory}${catalogEntry.name}`
@@ -42,9 +43,9 @@ export default class ProductData extends Component {
   render () {
     const tableRow = this._generateTableGuts()
     return (
-      <tbody>
+      <TableBody>
         {tableRow}
-      </tbody>
+      </TableBody>
     )
   }
 }
