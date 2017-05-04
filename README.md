@@ -1,4 +1,5 @@
 ![travis build](https://travis-ci.org/psbanka/advanced-js.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/psbanka/advanced-js/badge.svg?branch=master)](https://coveralls.io/github/psbanka/advanced-js?branch=master)
 
 # Week 1/2: Fundamentals of React
 
@@ -203,6 +204,8 @@ describe('SearchBox', () => {
 - experiment with `node_modules/.bin/jest --coverage` to try to get 100% test coverage!
 
 # Week 4-1: Getting professional
+
+A professional development environment employs high standards for code quality, and an integral part of any professional development shop is reviewing pull-requests and setting up and maintaining a Continuous Integration system. We will be configuring our repositories to automatically build when code is pushed to github, and we will make sure that the build system hold our code to high standards by running all unit tests and ensuring that lint rules pass.
 
 ## Set up Continuous Integration with Travis
 
