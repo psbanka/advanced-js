@@ -12,6 +12,7 @@ const SERVER_DATA = [
   {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
 ]
 
+/* eslint-disable no-unused-vars */
 /*
  * If you want an example of why we NEVER block, try
  * calling this "sleep" function in the onIsBuying() method
@@ -20,7 +21,7 @@ const SERVER_DATA = [
 function sleep (timeout) {
   console.log('start sleep')
   const start = new Date()
-  for (let i = 0; i >= 0; i ++) {
+  for (let i = 0; i >= 0; i += 1) {
     let now = new Date()
     let diff = now - start
     if (diff > timeout) {
