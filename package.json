@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-plugin-node": "^4.2.2",
     "prop-types": "^15.5.8",
@@ -28,5 +29,9 @@
     "test": "./node_modules/.bin/eslint src && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint src"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   }
 }
