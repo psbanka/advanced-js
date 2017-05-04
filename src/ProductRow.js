@@ -20,7 +20,7 @@ export default class ProductRow extends Component {
     let button
     if (selected) {
       button = (
-        <Button id={key} onClick={this.handleOnIsBuying} bsStyle="success">Selected</Button>
+        <Button id={key} onClick={this.handleOnIsBuying} bsStyle='success'>Selected</Button>
       )
     } else {
       button = (
