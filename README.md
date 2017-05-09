@@ -275,7 +275,7 @@ SearchBox.propTypes = {
 /* globals describe beforeEach it */
 ```
 
-
+ 
 Once all your code is passing lint and unit-testing, push your code back up to github and ensure that Travis is still passing your build.
 
 ### Advanced work
@@ -286,3 +286,38 @@ Once all your code is passing lint and unit-testing, push your code back up to g
 ![travis build](https://travis-ci.org/<YOUR_GITHUB_USERNAME>/<THE_NAME_OF_YOUR_PROJECT}.svg?branch=master)
 
 ```
+
+# Week 5: Implementing off-the-shelf components
+.
+It's time to finally address how ugly our app is. Let's see the power of React by taking some off-the-shelf components and incorporating them into our
+application. We should be able to do a transformation as follows: 
+
+![Using Bootstrap](https://cl.ly/3x1i3s1P3b2G)
+
+There are three possible libraries to choose from:
+
+- [React-Bootstrap](https://react-bootstrap.github.io/components.html)
+
+- [Material UI](http://www.material-ui.com/#/components/app-bar)
+
+- [Shopify Polaris](https://polaris.shopify.com/components/get-started#app)
+
+Be sure to follow the guidelines for installing each component. Some of them will likely require adding `.css` files to your application from 
+a CDN as well as `npm install`ing the components themselves. 
+
+# Week 6/7: Asynchronous JavaScript
+
+- Unlike Python, JavaScript NEVER blocks. See what happens when you add a blocking JavaScript call in your code (App.js has an example).
+- There are a few ways to handle asynchronicity in JavaScript: Threading (WebWorkers, which are intensely difficult to troubleshoot and write), callbacks, and promises (there are also generators and async/await, which we won't get into).
+- Callbacks are conceptually simple but turn nightmarish to implement if you have asynchronous actions that work on other asynchronous actions. Composing asynchronous functions using callbacks can turn into a complete rats-nest in a hurry (witness `messing-around/testCallbacks.js`).
+- Promises can be a little more complex conceptually but can dramatically increase the readability and simplicity of your code (witness `messing-around/testPromises.js`)
+
+## Additional reading
+
+[We have a problem with Promises](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)
+
+## Advanced work:
+- Implement a function that operates on a list of URLs and doesn't return until all the calls are complete.
+
+- Examine `async` and `await` ES2016 syntax and do a version of the `testPromises.js` which uses those instead of promise syntax.
+

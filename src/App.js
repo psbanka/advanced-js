@@ -12,6 +12,25 @@ const SERVER_DATA = [
   {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
 ]
 
+/* eslint-disable no-unused-vars */
+/*
+ * If you want an example of why we NEVER block, try
+ * calling this "sleep" function in the onIsBuying() method
+ * down below and see what happens to the browser!
+ */
+function sleep (timeout) {
+  console.log('start sleep')
+  const start = new Date()
+  for (let i = 0; i >= 0; i += 1) {
+    let now = new Date()
+    let diff = now - start
+    if (diff > timeout) {
+      break
+    }
+  }
+  console.log('end sleep')
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
@@ -59,6 +78,9 @@ class App extends Component {
     // Hey! if you want a variable as a key, put it in brackets!
     let newBuyObject = Object.assign(this.state.isBuying, {[key]: value})
     this.setState({isBuying: newBuyObject, total: newTotal})
+
+    // Give this a try if you want to see what happens when JavaScript blocks!
+    // sleep(2000)
   }
 
   render () {
