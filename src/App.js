@@ -3,14 +3,9 @@ import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
 
-const SERVER_DATA = [
-  {category: 'Sporting Goods', price: 49.99, stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: 9.99, stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: 29.99, stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: 99.99, stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: 399.99, stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
-]
+/* global fetch */
+
+const SERVER_URL = 'https://inventory-58a07.firebaseio.com'
 
 /* eslint-disable no-unused-vars */
 /*
@@ -35,6 +30,7 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      catalog: [],
       searchTerm: '',
       inStock: false,
       isBuying: {},
@@ -83,6 +79,16 @@ class App extends Component {
     // sleep(2000)
   }
 
+  componentWillMount () {
+    fetch(`${SERVER_URL}/catalog.json`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.setState({catalog: data})
+      })
+  }
+
   render () {
     return (
       <div>
@@ -93,7 +99,7 @@ class App extends Component {
           onFilterCheckBoxInput={this.onFilterCheckBoxInput}
         />
         <ProductLine
-          catalog={SERVER_DATA}
+          catalog={this.state.catalog}
           searchTerm={this.state.searchTerm}
           inStock={this.state.inStock}
           isBuying={this.state.isBuying}

@@ -2,8 +2,14 @@ import React from 'react'
 import App from '../App'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
+import {FAKE_SERVER_DATA} from '../test-data'
+
+import fetch from 'jest-fetch-mock'
+global.fetch = fetch
 
 /* global it describe expect beforeEach */
+
+fetch.mockResponse(JSON.stringify(FAKE_SERVER_DATA))
 
 describe('App', () => {
   it('does a snapshot check', () => {

@@ -6,6 +6,7 @@
     "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-plugin-node": "^4.2.2",
+    "jest-fetch-mock": "^1.1.1",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -26,11 +27,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "./node_modules/.bin/eslint src && react-scripts test --env=jsdom",
+    "coverage": "react-scripts test --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint src"
   },
   "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverage": true
+    "coverageDirectory": "./coverage/"
   }
 }
