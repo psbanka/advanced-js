@@ -3,14 +3,9 @@ import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
 
-const SERVER_DATA = [
-  {category: 'Sporting Goods', price: 49.99, stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: 9.99, stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: 29.99, stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: 99.99, stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: 399.99, stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
-]
+/* global fetch */
+
+const SERVER_ROOT = 'https://inventory-58a07.firebaseio.com'
 
 /* eslint-disable no-unused-vars */
 /*
@@ -38,7 +33,8 @@ class App extends Component {
       searchTerm: '',
       inStock: false,
       isBuying: {},
-      total: 0
+      total: 0,
+      catalog: []
     }
     this.onFilterTextInput = this.onFilterTextInput.bind(this)
     this.onFilterCheckBoxInput = this.onFilterCheckBoxInput.bind(this)
@@ -83,6 +79,37 @@ class App extends Component {
     // sleep(2000)
   }
 
+  /*
+  myAsyncFunction () {
+    return new Promise.resolve(2, 3, 4, 5)
+  }
+  */
+
+  // LIFECYCLE METHODS ----------------------------------------
+
+  componentWillMount () {
+    /*
+    this.myAsyncFunction()
+      .then((a, b, c, d) => {
+        console.log(a, b, c, d)
+      })
+    */
+
+    fetch(`${SERVER_ROOT}/catalog.json`)
+      .then((response) => {
+        console.log('the server responded')
+        return response.json()
+      })
+      .then((catalog) => {
+        console.log(catalog)
+        this.setState({catalog})
+      })
+      .catch((error) => {
+        console.log('server hates us')
+        console.log(error)
+      })
+  }
+
   render () {
     return (
       <div>
@@ -93,7 +120,7 @@ class App extends Component {
           onFilterCheckBoxInput={this.onFilterCheckBoxInput}
         />
         <ProductLine
-          catalog={SERVER_DATA}
+          catalog={this.state.catalog}
           searchTerm={this.state.searchTerm}
           inStock={this.state.inStock}
           isBuying={this.state.isBuying}

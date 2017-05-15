@@ -2,8 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../App'
 import { mount } from 'enzyme'
+import fetch from 'jest-fetch-mock'
+import {FAKE_SERVER_DATA} from '../test-data'
+
+global.fetch = fetch
 
 /* global it describe expect beforeEach */
+
+fetch.mockResponse(JSON.stringify(FAKE_SERVER_DATA))
 
 describe('integration test', () => {
   it('renders without crashing', () => {
@@ -14,8 +20,11 @@ describe('integration test', () => {
   describe('when filtering products', () => {
     let app
 
-    beforeEach(() => {
+    beforeEach((done) => {
       app = mount(<App />)
+      setTimeout(() => {
+        done()
+      }, 50)
     })
 
     it('will render the right number of table rows without filtering', () => {
@@ -42,8 +51,11 @@ describe('integration test', () => {
   describe('checking product items', () => {
     let app
 
-    beforeEach(() => {
+    beforeEach((done) => {
       app = mount(<App />)
+      setTimeout(() => {
+        done()
+      }, 50)
     })
 
     it('renders zero when unchecked', () => {
