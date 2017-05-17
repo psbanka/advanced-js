@@ -1,49 +1,79 @@
 exports[`App does a snapshot check 1`] = `
-<div>
+<div
+  className="container">
   <div
-    className="SearchBox">
-    <button
-      style={
-        Object {
-          "color": "red",
-        }
-      }>
-      Confirm
-    </button>
-    <input
-      id="in-stock-textbox"
-      onChange={[Function]}
-      placeholder="Search..."
-      type="text"
-      value="" />
-    <p>
-      <input
-        checked={false}
-        id="in-stock-checkbox"
-        onClick={[Function]}
-        type="checkbox" />
-      Only show products in stock
-    </p>
+    className="col-md-8 col-xs-12">
+    <div
+      className="panel panel-default"
+      id={undefined}>
+      <div
+        className="panel-body">
+        <div
+          className="page-header">
+          <h1>
+            Welcome SuperGoods 
+            <small>
+              We have lots of stuff!
+            </small>
+          </h1>
+        </div>
+        <div
+          className="SearchBox panel panel-default"
+          id={undefined}>
+          <div
+            className="panel-body">
+            <form>
+              <div
+                className="form-group">
+                <input
+                  className="form-control"
+                  id="in-stock-textbox"
+                  onChange={[Function]}
+                  placeholder="Search..."
+                  type="text"
+                  value="" />
+                <p>
+                  <div
+                    className="checkbox"
+                    style={undefined}>
+                    <label>
+                      <input
+                        checked={false}
+                        disabled={false}
+                        id="in-stock-checkbox"
+                        onClick={[Function]}
+                        type="checkbox" />
+                      Only show products in stock
+                    </label>
+                  </div>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+        <table
+          className="table table-striped table-bordered table-condensed table-hover">
+          <tbody />
+        </table>
+        <div
+          className="well">
+          <p
+            id="total-box">
+            Total: $
+            0
+          </p>
+        </div>
+        <button
+          id="edit-button"
+          onClick={[Function]}>
+          Edit
+        </button>
+      </div>
+      <div
+        className="panel-footer">
+        ©2017 SuperGoods International, LLC
+      </div>
+    </div>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <td>
-          Name
-        </td>
-        <td>
-          Price
-        </td>
-      </tr>
-    </thead>
-    <tbody />
-  </table>
-  <p
-    id="total-box">
-    0
-  </p>
-  <button
-    id="edit-button"
-    onClick={[Function]} />
 </div>
 `;

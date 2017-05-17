@@ -22,7 +22,6 @@ describe('App', () => {
     let wrapper, app
 
     describe('SearchBox callbacks', () => {
-
       beforeEach(() => {
         wrapper = shallow(<App />)
         app = wrapper.instance()
@@ -53,8 +52,11 @@ describe('App', () => {
       })
 
       it('properly decrements price', () => {
-        wrapper.setState({total: 299.99})
-        app.onIsBuying('product1', false, 299.99)
+        wrapper.setState({
+          total: 299.99,
+          isBuying: {product1: true}
+        })
+        app.onIsBuying('product1', 299.99)
         const expected = {product1: false}
         expect(app.state.isBuying).toEqual(expected)
         expect(app.state.total).toEqual(0)

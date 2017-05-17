@@ -2,7 +2,7 @@ exports[`ProductData does a snapshot check 1`] = `
 <tbody>
   <tr>
     <td
-      colSpan="2">
+      colSpan="3">
       <strong>
         things
       </strong>
@@ -15,17 +15,30 @@ exports[`ProductData does a snapshot check 1`] = `
         "color": "red",
       }
     }>
-    <td>
-      <input
-        checked={false}
+    <td
+      style={
+        Object {
+          "width": "100px",
+        }
+      }>
+      <button
+        className="btn btn-default"
+        disabled={false}
         id="things-bigthing"
-        onChange={[Function]}
-        type="checkbox" />
+        onClick={[Function]}
+        type="button">
+        Select
+      </button>
+    </td>
+    <td>
       bigThing
     </td>
     <td>
       $
-      99.99
+      <span
+        className="price">
+        99.99
+      </span>
     </td>
   </tr>
   <tr
@@ -35,22 +48,35 @@ exports[`ProductData does a snapshot check 1`] = `
         "color": "black",
       }
     }>
-    <td>
-      <input
-        checked={false}
+    <td
+      style={
+        Object {
+          "width": "100px",
+        }
+      }>
+      <button
+        className="btn btn-default"
+        disabled={false}
         id="things-littlething"
-        onChange={[Function]}
-        type="checkbox" />
+        onClick={[Function]}
+        type="button">
+        Select
+      </button>
+    </td>
+    <td>
       littleThing
     </td>
     <td>
       $
-      9.99
+      <span
+        className="price">
+        9.99
+      </span>
     </td>
   </tr>
   <tr>
     <td
-      colSpan="2">
+      colSpan="3">
       <strong>
         stuff
       </strong>
@@ -63,17 +89,30 @@ exports[`ProductData does a snapshot check 1`] = `
         "color": "black",
       }
     }>
-    <td>
-      <input
-        checked={false}
+    <td
+      style={
+        Object {
+          "width": "100px",
+        }
+      }>
+      <button
+        className="btn btn-default"
+        disabled={false}
         id="stuff-junkything"
-        onChange={[Function]}
-        type="checkbox" />
+        onClick={[Function]}
+        type="button">
+        Select
+      </button>
+    </td>
+    <td>
       junkyThing
     </td>
     <td>
       $
-      1.99
+      <span
+        className="price">
+        1.99
+      </span>
     </td>
   </tr>
 </tbody>

@@ -39,10 +39,10 @@ describe('ProductData', () => {
     const output = wrapper.instance()._generateTableGuts()
     const expectedKeys = [
       'things',
-      'thingsbigThing',
-      'thingslittleThing',
+      'things-bigthing',
+      'things-littlething',
       'stuff',
-      'stuffjunkyThing'
+      'stuff-junkything'
     ]
     expectedKeys.forEach((key, index) => {
       expect(output[index].key).toBe(key)

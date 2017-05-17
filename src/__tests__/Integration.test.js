@@ -58,24 +58,24 @@ describe('integration test', () => {
     })
 
     it('renders zero when unchecked', () => {
-      expect(wrapper.find('#total-box').text()).toBe('0')
+      expect(wrapper.find('#total-box').text()).toBe('Total: $0')
     })
 
     it('puts the correct value when clicking once on iPhone', () => {
-      wrapper.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      expect(wrapper.find('#total-box').text()).toBe('399.99')
+      wrapper.find('#electronics-iphone-5').simulate('click', {})
+      expect(wrapper.find('#total-box').text()).toBe('Total: $399.99')
     })
 
     it('puts the correct value when clicking twice on iPhone', () => {
-      wrapper.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      wrapper.find('#electronics-iphone-5').simulate('change', {target: {checked: false}})
-      expect(wrapper.find('#total-box').text()).toBe('0')
+      wrapper.find('#electronics-iphone-5').simulate('click', {})
+      wrapper.find('#electronics-iphone-5').simulate('click', {})
+      expect(wrapper.find('#total-box').text()).toBe('Total: $0')
     })
 
     it('adds values together properly', () => {
-      wrapper.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      wrapper.find('#sporting-goods-basketball').simulate('change', {target: {checked: true}})
-      expect(wrapper.find('#total-box').text()).toBe('429.98')
+      wrapper.find('#electronics-iphone-5').simulate('click', {})
+      wrapper.find('#sporting-goods-basketball').simulate('click', {})
+      expect(wrapper.find('#total-box').text()).toBe('Total: $429.98')
     })
   })
 
@@ -127,7 +127,6 @@ describe('integration test', () => {
         done()
       }, 50)
     })
-
   })
 
   describe('behavior while in edit mode', () => {
@@ -158,7 +157,6 @@ describe('integration test', () => {
       input.simulate('change', {target: {value: '10.99'}})
       expect(input.props()['value']).toBe(10.99)
     })
-
   })
 
   describe('behavior in leaving edit mode', () => {
@@ -199,5 +197,4 @@ describe('integration test', () => {
       expect(wrapper.find('#save-status').text()).toBe('Saved')
     })
   })
-
 })

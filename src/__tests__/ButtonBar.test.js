@@ -2,7 +2,7 @@ import React from 'react'
 import ButtonBar from '../ButtonBar'
 import { shallow } from 'enzyme'
 
-/* global jest describe it beforeEach */
+/* global jest describe it beforeEach expect */
 
 describe('Basic ButtonBar', () => {
   let wrapper, callback
@@ -38,7 +38,7 @@ describe('Editing ButtonBar', () => {
 
     wrapper = shallow(
       <ButtonBar
-        isEditing={true}
+        isEditing
         onEditToggle={callback}
       />
     )

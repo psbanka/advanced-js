@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductHeadline from './ProductHeadline'
+import {Table} from 'react-bootstrap'
 import ProductData from './ProductData'
 import PropTypes from 'prop-types'
 
@@ -8,8 +8,7 @@ const {Component} = React
 export default class ProductLine extends Component {
   render () {
     return (
-      <table>
-        <ProductHeadline />
+      <Table striped bordered condensed hover>
         <ProductData
           searchTerm={this.props.searchTerm}
           inStock={this.props.inStock}
@@ -18,7 +17,7 @@ export default class ProductLine extends Component {
           onIsBuying={this.props.onIsBuying}
           isEditing={this.props.isEditing}
         />
-      </table>
+      </Table>
     )
   }
 }
