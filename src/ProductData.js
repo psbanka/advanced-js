@@ -31,6 +31,7 @@ export default class ProductData extends Component {
               inStock={this.props.inStock}
               isBuying={this.props.isBuying}
               onIsBuying={this.props.onIsBuying}
+              isEditing={this.props.isEditing}
             />
           )
         }
@@ -54,5 +55,6 @@ ProductData.propTypes = {
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
-  onIsBuying: PropTypes.func
+  onIsBuying: PropTypes.func,
+  isEditing: PropTypes.bool
 }

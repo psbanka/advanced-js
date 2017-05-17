@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
+import ButtonBar from './ButtonBar'
 
 /* global fetch */
 
@@ -31,14 +32,17 @@ class App extends Component {
     super(props)
     this.state = {
       catalog: [],
+      editingCatalog: [],
       searchTerm: '',
       inStock: false,
+      isEditing: false,
       isBuying: {},
       total: 0
     }
     this.onFilterTextInput = this.onFilterTextInput.bind(this)
     this.onFilterCheckBoxInput = this.onFilterCheckBoxInput.bind(this)
     this.onIsBuying = this.onIsBuying.bind(this)
+    this.onEditToggle = this.onEditToggle.bind(this)
   }
 
   /*
@@ -79,6 +83,18 @@ class App extends Component {
     // sleep(2000)
   }
 
+  /**
+    * Toggles this.state.isEditing when the button is clicked in
+    * ButtonBar
+    */
+  onEditToggle () {
+    let editingCatalog
+    this.setState({
+      isEditing: !this.state.isEditing
+      editingCatalog:
+    })
+  }
+
   componentWillMount () {
     fetch(`${SERVER_URL}/catalog.json`)
       .then((response) => {
@@ -104,8 +120,13 @@ class App extends Component {
           inStock={this.state.inStock}
           isBuying={this.state.isBuying}
           onIsBuying={this.onIsBuying}
+          isEditing={this.state.isEditing}
         />
         <p id='total-box'>{this.state.total}</p>
+        <ButtonBar
+          onEditToggle={this.onEditToggle}
+          isEditing={this.state.isEditing}
+        />
       </div>
     )
   }

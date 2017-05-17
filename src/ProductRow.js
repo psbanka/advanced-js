@@ -25,6 +25,24 @@ export default class ProductRow extends Component {
     this.props.onIsBuying(key, value, this.props.price)
   }
 
+  renderInputForEditing () {
+    let key = makeKey(this.props.currentCategory, this.props.name)
+    let inputKey = `${key}-input`
+    if (this.props.isEditing) {
+      return (
+        <input
+          id={inputKey}
+          className='price'
+          value={this.props.price}
+          onChange={}
+        />
+      )
+    }
+    return (
+      <span className='price'>{this.props.price}</span>
+    )
+  }
+
   render () {
     const filterMatch = this.props.name.indexOf(this.props.searchTerm) !== -1
     let style = {color: 'black'}
@@ -33,6 +51,7 @@ export default class ProductRow extends Component {
     }
     let key = makeKey(this.props.currentCategory, this.props.name)
     let amIChecked = this.props.isBuying[key] || false
+
     if (!this.props.inStock || this.props.stocked) {
       if (filterMatch) {
         return (
@@ -44,7 +63,9 @@ export default class ProductRow extends Component {
                 onChange={this.handleOnIsBuying}
              />{this.props.name}
             </td>
-            <td>${this.props.price}</td>
+            <td>
+              ${this.renderInputForEditing()}
+            </td>
           </tr>
         )
       }
@@ -61,5 +82,6 @@ ProductRow.propTypes = {
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
-  onIsBuying: PropTypes.func
+  onIsBuying: PropTypes.func,
+  isEditing: PropTypes.bool
 }

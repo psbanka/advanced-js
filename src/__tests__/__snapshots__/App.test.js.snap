@@ -42,5 +42,8 @@ exports[`App does a snapshot check 1`] = `
     id="total-box">
     0
   </p>
+  <button
+    id="edit-button"
+    onClick={[Function]} />
 </div>
 `;
