@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Button, ButtonToolbar} from 'react-bootstrap'
 import {PropTypes} from 'prop-types'
 
 export default class ButtonBar extends Component {
@@ -14,28 +15,32 @@ export default class ButtonBar extends Component {
   render () {
     if (this.props.isEditing) {
       return (
-        <div>
-          <button
+        <ButtonToolbar>
+          <Button
+            bsStyle='primary'
             id='save-button'
           >
             Save
-          </button>
-          <button
+          </Button>
+          <Button
             id='cancel-button'
             onClick={this.handleOnEditToggle}
           >
             Cancel
-          </button>
-        </div>
+          </Button>
+        </ButtonToolbar>
       )
     }
     return (
-      <button
-        id='edit-button'
-        onClick={this.handleOnEditToggle}
-      >
-        Edit
-      </button>
+      <ButtonToolbar>
+        <Button
+          id='edit-button'
+          onClick={this.handleOnEditToggle}
+          bsStyle='primary'
+        >
+          Edit
+        </Button>
+      </ButtonToolbar>
     )
   }
 }

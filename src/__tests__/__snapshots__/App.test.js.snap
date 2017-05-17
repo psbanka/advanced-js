@@ -63,11 +63,18 @@ exports[`App does a snapshot check 1`] = `
             0
           </p>
         </div>
-        <button
-          id="edit-button"
-          onClick={[Function]}>
-          Edit
-        </button>
+        <div
+          className="btn-toolbar"
+          role="toolbar">
+          <button
+            className="btn btn-primary"
+            disabled={false}
+            id="edit-button"
+            onClick={[Function]}
+            type="button">
+            Edit
+          </button>
+        </div>
       </div>
       <div
         className="panel-footer">

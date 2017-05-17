@@ -127,6 +127,7 @@ class App extends Component {
               inStock={this.state.inStock}
               isBuying={this.state.isBuying}
               onIsBuying={this.onIsBuying}
+              isEditing={this.state.isEditing}
             />
             <Well>
               <p id='total-box'>Total: ${this.state.total}</p>

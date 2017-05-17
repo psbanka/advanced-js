@@ -45,7 +45,11 @@ describe('App', () => {
       })
 
       it('properly increments price', () => {
-        app.onIsBuying('product1', true, 299.99)
+        wrapper.setState({
+          total: 0,
+          isBuying: {}
+        })
+        app.onIsBuying('product1', 299.99)
         const expected = {product1: true}
         expect(app.state.isBuying).toEqual(expected)
         expect(app.state.total).toEqual(299.99)
