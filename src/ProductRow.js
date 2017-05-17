@@ -1,17 +1,7 @@
 import React, {Component} from 'react'
+import {Button} from 'react-bootstrap'
 import PropTypes from 'prop-types'
-
-/**
- * converts category and name to a valid key string
- * @param {String} category - the name of the category
- * @param {String} name - the name of the string
- * @returns {String} - valid HTML id
- */
-export function makeKey (category, name) {
-  const convertedCategory = category.toLowerCase().replace(/ /g, '-')
-  const convertedName = name.toLowerCase().replace(/ /g, '-')
-  return `${convertedCategory}-${convertedName}`
-}
+import {makeKey} from './utils'
 
 export default class ProductRow extends Component {
   constructor (props) {
@@ -19,10 +9,25 @@ export default class ProductRow extends Component {
     this.handleOnIsBuying = this.handleOnIsBuying.bind(this)
   }
 
-  handleOnIsBuying (e) {
-    const value = e.target.checked
-    let key = `${this.props.currentCategory}${this.props.name}`
-    this.props.onIsBuying(key, value, this.props.price)
+  handleOnIsBuying () {
+    let key = makeKey(this.props.currentCategory, this.props.name)
+    this.props.onIsBuying(key, this.props.price)
+  }
+
+  getButton () {
+    let key = makeKey(this.props.currentCategory, this.props.name)
+    let selected = this.props.isBuying[key] || false
+    let button
+    if (selected) {
+      button = (
+        <Button id={key} onClick={this.handleOnIsBuying} bsStyle='success'>Selected</Button>
+      )
+    } else {
+      button = (
+        <Button id={key} onClick={this.handleOnIsBuying}>Select</Button>
+      )
+    }
+    return button
   }
 
   render () {
@@ -31,18 +36,17 @@ export default class ProductRow extends Component {
     if (!this.props.stocked) {
       style.color = 'red'
     }
-    let key = makeKey(this.props.currentCategory, this.props.name)
-    let amIChecked = this.props.isBuying[key] || false
+    const button = this.getButton()
+
     if (!this.props.inStock || this.props.stocked) {
       if (filterMatch) {
         return (
           <tr className='product' style={style}>
+            <td style={{width: '100px'}}>
+              {button}
+            </td>
             <td>
-              <input
-                id={key}
-                checked={amIChecked} type='checkbox'
-                onChange={this.handleOnIsBuying}
-             />{this.props.name}
+              {this.props.name}
             </td>
             <td>${this.props.price}</td>
           </tr>

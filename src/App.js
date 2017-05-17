@@ -1,3 +1,4 @@
+import {PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
 import React, {Component} from 'react'
 import './App.css'
 import SearchBox from './SearchBox'
@@ -64,10 +65,11 @@ class App extends Component {
    * a user has clicked a row
    * @param key {String} - combination of category and name to uniquely
    *   identify a row
-   * @param value {bool} - selected or not
    * @param price {Number} - how much it costs
    */
-  onIsBuying (key, value, price) {
+  onIsBuying (key, price) {
+    const oldValue = this.state.isBuying[key] || false
+    const value = !oldValue
     let newTotal
     if (value) {
       newTotal = this.state.total + price
@@ -85,22 +87,31 @@ class App extends Component {
 
   render () {
     return (
-      <div>
-        <SearchBox
-          searchTerm={this.state.searchTerm}
-          inStock={this.state.inStock}
-          onFilterTextInput={this.onFilterTextInput}
-          onFilterCheckBoxInput={this.onFilterCheckBoxInput}
-        />
-        <ProductLine
-          catalog={SERVER_DATA}
-          searchTerm={this.state.searchTerm}
-          inStock={this.state.inStock}
-          isBuying={this.state.isBuying}
-          onIsBuying={this.onIsBuying}
-        />
-        <p id='total-box'>{this.state.total}</p>
-      </div>
+      <Grid>
+        <Col xs={12} md={8}>
+          <Panel footer='&copy;2017 SuperGoods International, LLC'>
+            <PageHeader>
+              Welcome SuperGoods <small>We have lots of stuff!</small>
+            </PageHeader>
+            <SearchBox
+              searchTerm={this.state.searchTerm}
+              inStock={this.state.inStock}
+              onFilterTextInput={this.onFilterTextInput}
+              onFilterCheckBoxInput={this.onFilterCheckBoxInput}
+            />
+            <ProductLine
+              catalog={SERVER_DATA}
+              searchTerm={this.state.searchTerm}
+              inStock={this.state.inStock}
+              isBuying={this.state.isBuying}
+              onIsBuying={this.onIsBuying}
+            />
+            <Well>
+              <p id='total-box'>Total: ${this.state.total}</p>
+            </Well>
+          </Panel>
+        </Col>
+      </Grid>
     )
   }
 }

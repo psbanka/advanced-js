@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ProductRow from './ProductRow'
 import PropTypes from 'prop-types'
+import {makeKey} from './utils'
 
 export default class ProductData extends Component {
   _generateTableGuts () {
@@ -16,11 +17,11 @@ export default class ProductData extends Component {
     categories.forEach((currentCategory) => {
       tableRow.push(
         <tr key={currentCategory}>
-          <td colSpan='2'><strong>{currentCategory}</strong></td>
+          <td colSpan='3'><strong>{currentCategory}</strong></td>
         </tr>
       )
       this.props.catalog.forEach((catalogEntry) => {
-        let key = `${currentCategory}${catalogEntry.name}`
+        let key = makeKey(currentCategory, catalogEntry.name)
         if (currentCategory === catalogEntry.category) {
           tableRow.push(
             <ProductRow

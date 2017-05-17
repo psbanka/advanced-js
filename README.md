@@ -275,7 +275,6 @@ SearchBox.propTypes = {
 /* globals describe beforeEach it */
 ```
 
- 
 Once all your code is passing lint and unit-testing, push your code back up to github and ensure that Travis is still passing your build.
 
 ### Advanced work

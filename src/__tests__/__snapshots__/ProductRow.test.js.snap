@@ -6,12 +6,22 @@ exports[`ProductRow does a snapshot check 1`] = `
       "color": "black",
     }
   }>
-  <td>
-    <input
-      checked={false}
+  <td
+    style={
+      Object {
+        "width": "100px",
+      }
+    }>
+    <button
+      className="btn btn-default"
+      disabled={false}
       id="electronics-iphone-6"
-      onChange={[Function]}
-      type="checkbox" />
+      onClick={[Function]}
+      type="button">
+      Select
+    </button>
+  </td>
+  <td>
     iphone 6
   </td>
   <td>

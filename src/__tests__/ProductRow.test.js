@@ -1,16 +1,9 @@
 import React from 'react'
-import ProductRow, {makeKey} from '../ProductRow'
+import ProductRow from '../ProductRow'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 
 /* global it describe expect jest */
-
-describe('makeKey', () => {
-  it('can make a key', () => {
-    let output = makeKey('foo', 'bar')
-    expect(output).toEqual('foo-bar')
-  })
-})
 
 describe('ProductRow', () => {
   it('does a snapshot check', () => {
@@ -48,8 +41,8 @@ describe('ProductRow', () => {
         />
       )
       const productRow = wrapper.instance()
-      productRow.handleOnIsBuying({target: {checked: true}})
-      expect(callback.mock.calls).toEqual([['electronicsiphone 6', true, 121]])
+      productRow.handleOnIsBuying({})
+      expect(callback.mock.calls).toEqual([['electronics-iphone-6', 121]])
     })
   })
 
@@ -69,10 +62,10 @@ describe('ProductRow', () => {
           onIsBuying={callback}
         />
       )
-      const inputObject = wrapper.find('input')
+      const inputObject = wrapper.find('Button')
       expect(inputObject.length).toBe(1)
-      inputObject.simulate('change', {target: {checked: true}})
-      expect(callback.mock.calls).toEqual([['electronicsiphone 6', true, 121]])
+      inputObject.simulate('click', {})
+      expect(callback.mock.calls).toEqual([['electronics-iphone-6', 121]])
     })
 
     it('does not render if filtered out', () => {
