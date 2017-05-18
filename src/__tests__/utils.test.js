@@ -4,7 +4,7 @@ import {makeKey} from '../utils'
 
 describe('makeKey', () => {
   it('can make a key', () => {
-    let output = makeKey('foo', 'bar')
+    let output = makeKey({category: 'foo', name: 'bar'})
     expect(output).toEqual('foo-bar')
   })
 })

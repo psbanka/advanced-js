@@ -15,6 +15,7 @@ export default class ProductLine extends Component {
           catalog={this.props.catalog}
           isBuying={this.props.isBuying}
           onIsBuying={this.props.onIsBuying}
+          onPriceEdit={this.props.onPriceEdit}
           isEditing={this.props.isEditing}
         />
       </Table>
@@ -28,5 +29,6 @@ ProductLine.propTypes = {
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
   onIsBuying: PropTypes.func,
+  onPriceEdit: PropTypes.func,
   isEditing: PropTypes.bool
 }

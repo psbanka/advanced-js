@@ -7,15 +7,27 @@ export default class ProductRow extends Component {
   constructor (props) {
     super(props)
     this.handleOnIsBuying = this.handleOnIsBuying.bind(this)
+    this.handlePriceEdit = this.handlePriceEdit.bind(this)
+  }
+
+  makeMyKey () {
+    return makeKey({
+      category: this.props.currentCategory, name: this.props.name
+    })
   }
 
   handleOnIsBuying () {
-    let key = makeKey(this.props.currentCategory, this.props.name)
+    let key = this.makeMyKey()
     this.props.onIsBuying(key, this.props.price)
   }
 
+  handlePriceEdit (event) {
+    let key = this.makeMyKey()
+    this.props.onPriceEdit(key, Number(event.target.value))
+  }
+
   getButton () {
-    let key = makeKey(this.props.currentCategory, this.props.name)
+    let key = this.makeMyKey()
     let selected = this.props.isBuying[key] || false
     let button
     if (selected) {
@@ -31,7 +43,7 @@ export default class ProductRow extends Component {
   }
 
   renderInputForEditing () {
-    let key = makeKey(this.props.currentCategory, this.props.name)
+    let key = this.makeMyKey()
     let inputKey = `${key}-input`
     if (this.props.isEditing) {
       return (
@@ -39,6 +51,7 @@ export default class ProductRow extends Component {
           id={inputKey}
           className='price'
           value={this.props.price}
+          onChange={this.handlePriceEdit}
         />
       )
     }
@@ -86,5 +99,6 @@ ProductRow.propTypes = {
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
   onIsBuying: PropTypes.func,
+  onPriceEdit: PropTypes.func,
   isEditing: PropTypes.bool
 }

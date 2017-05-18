@@ -24,6 +24,34 @@ describe('ProductRow', () => {
     expect(json).toMatchSnapshot()
   })
 
+  describe('handlePriceEdit', () => {
+    let callback, wrapper, productRow
+
+    beforeEach(() => {
+      callback = jest.fn()
+      wrapper = shallow(
+        <ProductRow
+          currentCategory='electronics'
+          category='electronics'
+          name='iphone 6'
+          price={121}
+          stocked
+          inStock
+          isBuying={{}}
+          searchTerm=''
+          onIsBuying={() => {}}
+          onPriceEdit={callback}
+        />
+      )
+      productRow = wrapper.instance()
+    })
+
+    it('properly calls upstream callback', () => {
+      productRow.handlePriceEdit({target: {value: '10.01'}})
+      expect(callback.mock.calls).toEqual([['electronics-iphone-6', 10.01]])
+    })
+  })
+
   describe('handleOnIsBuying', () => {
     it('properly calls upstream callback', () => {
       const callback = jest.fn()

@@ -4,6 +4,7 @@ import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
 import ButtonBar from './ButtonBar'
+import {makeKey} from './utils'
 
 /* global fetch */
 
@@ -44,6 +45,7 @@ class App extends Component {
     this.onFilterCheckBoxInput = this.onFilterCheckBoxInput.bind(this)
     this.onIsBuying = this.onIsBuying.bind(this)
     this.onEditToggle = this.onEditToggle.bind(this)
+    this.onPriceEdit = this.onPriceEdit.bind(this)
   }
 
   /*
@@ -59,6 +61,21 @@ class App extends Component {
 
   onFilterCheckBoxInput (e) {
     this.setState({inStock: e.target.checked})
+  }
+
+  /**
+   * Updates the price of the item identified by the key provided
+   * @param {String} key - e.g. 'sporting-goods-football'
+   * @param {String} price - the new price to be set
+   */
+  onPriceEdit (key, price) {
+    const newEditingCatalog = this.state.editingCatalog.map((x) => Object.assign({}, x))
+    newEditingCatalog.forEach((item) => {
+      if (makeKey(item) === key) {
+        item.price = price
+      }
+    })
+    this.setState({editingCatalog: newEditingCatalog})
   }
 
   /**
@@ -90,10 +107,11 @@ class App extends Component {
     * ButtonBar
     */
   onEditToggle () {
-    let editingCatalog
+    // Goal is to copy this.state.catalog into a new variable
+    let editingCatalog = this.state.catalog.map((x) => Object.assign({}, x))
     this.setState({
       isEditing: !this.state.isEditing,
-      editingCatalog: []
+      editingCatalog: editingCatalog
     })
   }
 
@@ -122,12 +140,13 @@ class App extends Component {
               onFilterCheckBoxInput={this.onFilterCheckBoxInput}
             />
             <ProductLine
-              catalog={this.state.catalog}
+              catalog={this.state.isEditing ? this.state.editingCatalog : this.state.catalog}
               searchTerm={this.state.searchTerm}
               inStock={this.state.inStock}
               isBuying={this.state.isBuying}
               onIsBuying={this.onIsBuying}
               isEditing={this.state.isEditing}
+              onPriceEdit={this.onPriceEdit}
             />
             <Well>
               <p id='total-box'>Total: ${this.state.total}</p>

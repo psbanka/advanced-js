@@ -149,13 +149,13 @@ describe('integration test', () => {
     it('baseball price input exists and has the right value', () => {
       const input = wrapper.find('#sporting-goods-baseball-input')
       expect(input.exists()).toBe(true)
-      expect(input.props()['value']).toBe(9.99)
+      expect(input.props().value).toBe(9.99)
     })
 
     it('will update the value when changed', () => {
       const input = wrapper.find('#sporting-goods-baseball-input')
       input.simulate('change', {target: {value: '10.99'}})
-      expect(input.props()['value']).toBe(10.99)
+      expect(input.props().value).toBe(10.99)
     })
   })
 
