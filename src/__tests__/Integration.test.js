@@ -59,24 +59,24 @@ describe('integration test', () => {
     })
 
     it('renders zero when unchecked', () => {
-      expect(app.find('#total-box').text()).toBe('0')
+      expect(app.find('#total-box').text()).toBe('Total: $0')
     })
 
     it('puts the correct value when clicking once on iPhone', () => {
-      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      expect(app.find('#total-box').text()).toBe('399.99')
+      app.find('#electronics-iphone-5').simulate('click', {})
+      expect(app.find('#total-box').text()).toBe('Total: $399.99')
     })
 
     it('puts the correct value when clicking twice on iPhone', () => {
-      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      app.find('#electronics-iphone-5').simulate('change', {target: {checked: false}})
-      expect(app.find('#total-box').text()).toBe('0')
+      app.find('#electronics-iphone-5').simulate('click', {})
+      app.find('#electronics-iphone-5').simulate('click', {})
+      expect(app.find('#total-box').text()).toBe('Total: $0')
     })
 
     it('adds values together properly', () => {
-      app.find('#electronics-iphone-5').simulate('change', {target: {checked: true}})
-      app.find('#sporting-goods-basketball').simulate('change', {target: {checked: true}})
-      expect(app.find('#total-box').text()).toBe('429.98')
+      app.find('#electronics-iphone-5').simulate('click', {})
+      app.find('#sporting-goods-basketball').simulate('click', {})
+      expect(app.find('#total-box').text()).toBe('Total: $429.98')
     })
   })
 })
