@@ -10,8 +10,6 @@ global.fetch = fetch
 
 /* global it describe expect beforeEach */
 
-fetch.mockResponse(JSON.stringify(FAKE_SERVER_DATA))
-
 describe('App', () => {
   it('does a snapshot check', () => {
     const component = renderer.create(<App />)
@@ -23,6 +21,7 @@ describe('App', () => {
     let wrapper, app
 
     describe('SearchBox callbacks', () => {
+      fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       beforeEach(() => {
         wrapper = shallow(<App />)
         app = wrapper.instance()
@@ -41,6 +40,7 @@ describe('App', () => {
 
     describe('onIsBuying', () => {
       beforeEach(() => {
+        fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
         wrapper = shallow(<App />)
         app = wrapper.instance()
       })
@@ -70,6 +70,7 @@ describe('App', () => {
 
     describe('onPriceEdit', () => {
       beforeEach((done) => {
+        fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
         wrapper = shallow(<App />)
         setTimeout(() => {
           app = wrapper.instance()
@@ -92,6 +93,7 @@ describe('App', () => {
 
     describe('onEditToggle', () => {
       beforeEach((done) => {
+        fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
         wrapper = shallow(<App />)
         setTimeout(() => {
           app = wrapper.instance()
@@ -112,6 +114,37 @@ describe('App', () => {
         expect(wrapper.state('editingCatalog')).not.toBe(wrapper.state('catalog'))
         wrapper.state('editingCatalog')[0].price = 5.00
         expect(wrapper.state('catalog')[0].price).not.toEqual(5.00)
+      })
+    })
+
+    describe('onSave', () => {
+      let wrapper, app
+
+      beforeEach((done) => {
+        const editingCatalog = [{category: 'Sporting Goods', price: 19.99, stocked: true, name: 'Football'}]
+        const catalog = [{category: 'Sporting Goods', price: 39.99, stocked: true, name: 'Football'}]
+        fetch.mockResponseOnce(JSON.stringify(catalog))
+        fetch.mockResponseOnce(JSON.stringify(editingCatalog))
+        wrapper = shallow(<App />)
+        wrapper.setState({
+          isEditing: true,
+          editingCatalog,
+          catalog
+        })
+        app = wrapper.instance()
+        app.onSave()
+        setTimeout(() => {
+          done()
+        }, 50)
+      })
+
+      it('hits the API and optimistically saves', () => {
+        expect(wrapper.state('catalog')[0].price).toBe(19.99)
+      })
+
+      it('pops a message that saving is successful', () => {
+        const messageBox = wrapper.find('#message-box')
+        expect(messageBox.node.props.children.props.children).toEqual('Saved.')
       })
     })
   })

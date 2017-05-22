@@ -1,4 +1,4 @@
-import {PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
+import {Alert, PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
 import React, {Component} from 'react'
 import './App.css'
 import SearchBox from './SearchBox'
@@ -39,6 +39,7 @@ class App extends Component {
       inStock: false,
       isEditing: false,
       isBuying: {},
+      message: '',
       total: 0
     }
     this.onFilterTextInput = this.onFilterTextInput.bind(this)
@@ -46,6 +47,8 @@ class App extends Component {
     this.onIsBuying = this.onIsBuying.bind(this)
     this.onEditToggle = this.onEditToggle.bind(this)
     this.onPriceEdit = this.onPriceEdit.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.dismissMessage = this.dismissMessage.bind(this)
   }
 
   /*
@@ -107,12 +110,39 @@ class App extends Component {
     * ButtonBar
     */
   onEditToggle () {
-    // Goal is to copy this.state.catalog into a new variable
     let editingCatalog = this.state.catalog.map((x) => Object.assign({}, x))
     this.setState({
       isEditing: !this.state.isEditing,
       editingCatalog: editingCatalog
     })
+  }
+
+  /**
+   * Send this.state.editingCatalog up to the server and *optimistically*
+   * replace our catalog with editingCatalog.
+   */
+  onSave () {
+    fetch(`${SERVER_URL}/catalog.json`, {
+      method: 'PUT',
+      body: JSON.stringify(this.state.editingCatalog)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // The server responds with what *it* thinks the data should be
+        // This should match what we think, but it *might not*, so we set it
+        this.setState({catalog: data, message: 'Saved.'})
+      })
+    let newCatalog = this.state.editingCatalog.map((x) => Object.assign({}, x))
+    this.setState({
+      isEditing: false,
+      catalog: newCatalog,
+      editingCatalog: [],
+      message: 'Saving...'
+    })
+  }
+
+  dismissMessage () {
+    this.setState({message: ''})
   }
 
   componentWillMount () {
@@ -126,10 +156,23 @@ class App extends Component {
   }
 
   render () {
+    let messageBox = null
+    if (this.state.message) {
+      messageBox = (
+        <Alert
+          onDismiss={this.dismissMessage}
+          id='message-box'
+          bsStyle='warning'
+        >
+          <p id='#message'>{this.state.message}</p>
+        </Alert>
+      )
+    }
     return (
       <Grid>
         <Col xs={12} md={8}>
           <Panel footer='&copy;2017 SuperGoods International, LLC'>
+            {messageBox}
             <PageHeader>
               Welcome SuperGoods <small>We have lots of stuff!</small>
             </PageHeader>
@@ -153,6 +196,7 @@ class App extends Component {
             </Well>
             <ButtonBar
               onEditToggle={this.onEditToggle}
+              onSave={this.onSave}
               isEditing={this.state.isEditing}
             />
           </Panel>

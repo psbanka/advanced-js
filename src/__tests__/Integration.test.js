@@ -8,10 +8,9 @@ global.fetch = fetch
 
 /* global it describe expect beforeEach */
 
-global.fetch.mockResponse(JSON.stringify(FAKE_SERVER_DATA))
-
 describe('integration test', () => {
   it('renders without crashing', () => {
+    global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
     const div = document.createElement('div')
     ReactDOM.render(<App />, div)
   })
@@ -20,6 +19,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         done()
@@ -51,6 +51,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         done()
@@ -83,6 +84,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         done()
@@ -98,6 +100,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         done()
@@ -133,6 +136,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         wrapper.find('#edit-button').simulate('click')
@@ -163,6 +167,7 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         wrapper.find('#edit-button').simulate('click')
@@ -182,6 +187,8 @@ describe('integration test', () => {
     let wrapper
 
     beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
       wrapper = mount(<App />)
       setTimeout(() => {
         wrapper.find('#edit-button').simulate('click')
@@ -189,12 +196,16 @@ describe('integration test', () => {
       }, 50)
     })
 
-    it('changes to edit and updates the value and sends to server', () => {
+    it('changes to edit and updates the value and sends to server', (done) => {
       // I assume there is an input box with id=baseball-input and
       // that it can receive events to update it
       wrapper.find('#sporting-goods-baseball-input').simulate('change', {target: {value: '9999.32'}})
       wrapper.find('#save-button').simulate('click')
-      expect(wrapper.find('#save-status').text()).toBe('Saved')
+      setTimeout(() => {
+        const message = wrapper.find('#message')
+        expect(message.root.node.state.message).toEqual('Saved.')
+        done()
+      }, 50)
     })
   })
 })

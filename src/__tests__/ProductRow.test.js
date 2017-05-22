@@ -3,7 +3,7 @@ import ProductRow from '../ProductRow'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 
-/* global it describe expect jest */
+/* global it describe expect jest beforeEach */
 
 describe('ProductRow', () => {
   it('does a snapshot check', () => {

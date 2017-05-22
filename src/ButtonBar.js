@@ -19,6 +19,7 @@ export default class ButtonBar extends Component {
           <Button
             bsStyle='primary'
             id='save-button'
+            onClick={this.props.onSave}
           >
             Save
           </Button>
@@ -47,5 +48,6 @@ export default class ButtonBar extends Component {
 
 ButtonBar.propTypes = {
   isEditing: PropTypes.bool,
-  onEditToggle: PropTypes.func
+  onEditToggle: PropTypes.func,
+  onSave: PropTypes.func
 }

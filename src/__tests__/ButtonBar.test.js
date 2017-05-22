@@ -31,15 +31,17 @@ describe('Basic ButtonBar', () => {
 })
 
 describe('Editing ButtonBar', () => {
-  let wrapper, callback
+  let wrapper, editCallback, saveCallback
 
   beforeEach(() => {
-    callback = jest.fn()
+    editCallback = jest.fn()
+    saveCallback = jest.fn()
 
     wrapper = shallow(
       <ButtonBar
         isEditing
-        onEditToggle={callback}
+        onEditToggle={editCallback}
+        onSave={saveCallback}
       />
     )
   })
@@ -50,8 +52,13 @@ describe('Editing ButtonBar', () => {
     expect(wrapper.find('#edit-button').exists()).toBe(false)
   })
 
-  it('will call its callback when cancel is clicked', () => {
+  it('will call its edit callback when cancel is clicked', () => {
     wrapper.find('#cancel-button').simulate('click')
-    expect(callback.mock.calls).toEqual([[]])
+    expect(editCallback.mock.calls).toEqual([[]])
+  })
+
+  it('will call its save callback when save is clicked', () => {
+    wrapper.find('#save-button').simulate('click')
+    expect(saveCallback.mock.calls).toEqual([[]])
   })
 })
