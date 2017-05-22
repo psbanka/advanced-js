@@ -26,7 +26,10 @@ exports[`ProductRow does a snapshot check 1`] = `
   </td>
   <td>
     $
-    121
+    <span
+      className="price">
+      121
+    </span>
   </td>
 </tr>
 `;

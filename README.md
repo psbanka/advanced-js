@@ -320,3 +320,4 @@ a CDN as well as `npm install`ing the components themselves.
 
 - Examine `async` and `await` ES2016 syntax and do a version of the `testPromises.js` which uses those instead of promise syntax.
 
+# Week 8: Firebase

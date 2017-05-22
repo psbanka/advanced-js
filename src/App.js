@@ -1,17 +1,14 @@
-import {PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
+import {Alert, PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
 import React, {Component} from 'react'
 import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
+import ButtonBar from './ButtonBar'
+import {makeKey} from './utils'
 
-const SERVER_DATA = [
-  {category: 'Sporting Goods', price: 49.99, stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: 9.99, stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: 29.99, stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: 99.99, stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: 399.99, stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: 199.99, stocked: true, name: 'Nexus 7'}
-]
+/* global fetch */
+
+const SERVER_URL = 'https://inventory-58a07.firebaseio.com'
 
 /* eslint-disable no-unused-vars */
 /*
@@ -36,14 +33,22 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      catalog: [],
+      editingCatalog: [],
       searchTerm: '',
       inStock: false,
+      isEditing: false,
       isBuying: {},
+      message: '',
       total: 0
     }
     this.onFilterTextInput = this.onFilterTextInput.bind(this)
     this.onFilterCheckBoxInput = this.onFilterCheckBoxInput.bind(this)
     this.onIsBuying = this.onIsBuying.bind(this)
+    this.onEditToggle = this.onEditToggle.bind(this)
+    this.onPriceEdit = this.onPriceEdit.bind(this)
+    this.onSave = this.onSave.bind(this)
+    this.dismissMessage = this.dismissMessage.bind(this)
   }
 
   /*
@@ -59,6 +64,21 @@ class App extends Component {
 
   onFilterCheckBoxInput (e) {
     this.setState({inStock: e.target.checked})
+  }
+
+  /**
+   * Updates the price of the item identified by the key provided
+   * @param {String} key - e.g. 'sporting-goods-football'
+   * @param {String} price - the new price to be set
+   */
+  onPriceEdit (key, price) {
+    const newEditingCatalog = this.state.editingCatalog.map((x) => Object.assign({}, x))
+    newEditingCatalog.forEach((item) => {
+      if (makeKey(item) === key) {
+        item.price = price
+      }
+    })
+    this.setState({editingCatalog: newEditingCatalog})
   }
 
   /**
@@ -85,11 +105,74 @@ class App extends Component {
     // sleep(2000)
   }
 
+  /**
+    * Toggles this.state.isEditing when the button is clicked in
+    * ButtonBar
+    */
+  onEditToggle () {
+    let editingCatalog = this.state.catalog.map((x) => Object.assign({}, x))
+    this.setState({
+      isEditing: !this.state.isEditing,
+      editingCatalog: editingCatalog
+    })
+  }
+
+  /**
+   * Send this.state.editingCatalog up to the server and *optimistically*
+   * replace our catalog with editingCatalog.
+   */
+  onSave () {
+    fetch(`${SERVER_URL}/catalog.json`, {
+      method: 'PUT',
+      body: JSON.stringify(this.state.editingCatalog)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // The server responds with what *it* thinks the data should be
+        // This should match what we think, but it *might not*, so we set it
+        this.setState({catalog: data, message: 'Saved.'})
+      })
+    let newCatalog = this.state.editingCatalog.map((x) => Object.assign({}, x))
+    this.setState({
+      isEditing: false,
+      catalog: newCatalog,
+      editingCatalog: [],
+      message: 'Saving...'
+    })
+  }
+
+  dismissMessage () {
+    this.setState({message: ''})
+  }
+
+  componentWillMount () {
+    fetch(`${SERVER_URL}/catalog.json`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        this.setState({catalog: data})
+      })
+  }
+
   render () {
+    let messageBox = null
+    if (this.state.message) {
+      messageBox = (
+        <Alert
+          onDismiss={this.dismissMessage}
+          id='message-box'
+          bsStyle='warning'
+        >
+          <p id='#message'>{this.state.message}</p>
+        </Alert>
+      )
+    }
     return (
       <Grid>
         <Col xs={12} md={8}>
           <Panel footer='&copy;2017 SuperGoods International, LLC'>
+            {messageBox}
             <PageHeader>
               Welcome SuperGoods <small>We have lots of stuff!</small>
             </PageHeader>
@@ -100,15 +183,22 @@ class App extends Component {
               onFilterCheckBoxInput={this.onFilterCheckBoxInput}
             />
             <ProductLine
-              catalog={SERVER_DATA}
+              catalog={this.state.isEditing ? this.state.editingCatalog : this.state.catalog}
               searchTerm={this.state.searchTerm}
               inStock={this.state.inStock}
               isBuying={this.state.isBuying}
               onIsBuying={this.onIsBuying}
+              isEditing={this.state.isEditing}
+              onPriceEdit={this.onPriceEdit}
             />
             <Well>
               <p id='total-box'>Total: ${this.state.total}</p>
             </Well>
+            <ButtonBar
+              onEditToggle={this.onEditToggle}
+              onSave={this.onSave}
+              isEditing={this.state.isEditing}
+            />
           </Panel>
         </Col>
       </Grid>

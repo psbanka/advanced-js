@@ -7,15 +7,27 @@ export default class ProductRow extends Component {
   constructor (props) {
     super(props)
     this.handleOnIsBuying = this.handleOnIsBuying.bind(this)
+    this.handlePriceEdit = this.handlePriceEdit.bind(this)
+  }
+
+  makeMyKey () {
+    return makeKey({
+      category: this.props.currentCategory, name: this.props.name
+    })
   }
 
   handleOnIsBuying () {
-    let key = makeKey(this.props.currentCategory, this.props.name)
+    let key = this.makeMyKey()
     this.props.onIsBuying(key, this.props.price)
   }
 
+  handlePriceEdit (event) {
+    let key = this.makeMyKey()
+    this.props.onPriceEdit(key, Number(event.target.value))
+  }
+
   getButton () {
-    let key = makeKey(this.props.currentCategory, this.props.name)
+    let key = this.makeMyKey()
     let selected = this.props.isBuying[key] || false
     let button
     if (selected) {
@@ -30,12 +42,31 @@ export default class ProductRow extends Component {
     return button
   }
 
+  renderInputForEditing () {
+    let key = this.makeMyKey()
+    let inputKey = `${key}-input`
+    if (this.props.isEditing) {
+      return (
+        <input
+          id={inputKey}
+          className='price'
+          value={this.props.price}
+          onChange={this.handlePriceEdit}
+        />
+      )
+    }
+    return (
+      <span className='price'>{this.props.price}</span>
+    )
+  }
+
   render () {
     const filterMatch = this.props.name.indexOf(this.props.searchTerm) !== -1
     let style = {color: 'black'}
     if (!this.props.stocked) {
       style.color = 'red'
     }
+
     const button = this.getButton()
 
     if (!this.props.inStock || this.props.stocked) {
@@ -48,7 +79,9 @@ export default class ProductRow extends Component {
             <td>
               {this.props.name}
             </td>
-            <td>${this.props.price}</td>
+            <td>
+              ${this.renderInputForEditing()}
+            </td>
           </tr>
         )
       }
@@ -65,5 +98,7 @@ ProductRow.propTypes = {
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
-  onIsBuying: PropTypes.func
+  onIsBuying: PropTypes.func,
+  onPriceEdit: PropTypes.func,
+  isEditing: PropTypes.bool
 }

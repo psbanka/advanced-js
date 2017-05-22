@@ -35,7 +35,10 @@ exports[`ProductData does a snapshot check 1`] = `
     </td>
     <td>
       $
-      99.99
+      <span
+        className="price">
+        99.99
+      </span>
     </td>
   </tr>
   <tr
@@ -65,7 +68,10 @@ exports[`ProductData does a snapshot check 1`] = `
     </td>
     <td>
       $
-      9.99
+      <span
+        className="price">
+        9.99
+      </span>
     </td>
   </tr>
   <tr>
@@ -103,7 +109,10 @@ exports[`ProductData does a snapshot check 1`] = `
     </td>
     <td>
       $
-      1.99
+      <span
+        className="price">
+        1.99
+      </span>
     </td>
   </tr>
 </tbody>

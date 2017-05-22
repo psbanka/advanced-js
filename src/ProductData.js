@@ -21,7 +21,9 @@ export default class ProductData extends Component {
         </tr>
       )
       this.props.catalog.forEach((catalogEntry) => {
-        let key = makeKey(currentCategory, catalogEntry.name)
+        let key = makeKey({
+          category: currentCategory, name: catalogEntry.name
+        })
         if (currentCategory === catalogEntry.category) {
           tableRow.push(
             <ProductRow
@@ -32,6 +34,8 @@ export default class ProductData extends Component {
               inStock={this.props.inStock}
               isBuying={this.props.isBuying}
               onIsBuying={this.props.onIsBuying}
+              onPriceEdit={this.props.onPriceEdit}
+              isEditing={this.props.isEditing}
             />
           )
         }
@@ -55,5 +59,7 @@ ProductData.propTypes = {
   searchTerm: PropTypes.string,
   inStock: PropTypes.bool,
   isBuying: PropTypes.object,
-  onIsBuying: PropTypes.func
+  onIsBuying: PropTypes.func,
+  onPriceEdit: PropTypes.func,
+  isEditing: PropTypes.bool
 }
