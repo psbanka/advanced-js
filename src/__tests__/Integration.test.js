@@ -208,4 +208,24 @@ describe('integration test', () => {
       }, 50)
     })
   })
+
+  describe('getting details', () => {
+    let wrapper
+
+    beforeEach((done) => {
+      global.fetch.mockResponseOnce(JSON.stringify(FAKE_SERVER_DATA))
+      wrapper = mount(<App />)
+      setTimeout(() => {
+        done()
+      }, 50)
+    })
+
+    it('properly displays infomation about an iphone when clicked', () => {
+      const row = wrapper.find('#electronics-iphone-5-row')
+      row.simulate('click')
+      // see that the URL has changed to /product/electronics-iphone...
+      const productDescription = wrapper.find('#product-description')
+      expect(productDescription.text()).toBe('amazing new iphone!')
+    })
+  })
 })

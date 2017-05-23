@@ -52,6 +52,31 @@ describe('ProductRow', () => {
     })
   })
 
+  describe('handle onGetDetails', () => {
+    let callback, wrapper
+    beforeEach(() => {
+      callback = jest.fn()
+      wrapper = shallow(
+        <ProductRow
+          currentCategory='electronics'
+          category='electronics'
+          name='iphone 6'
+          price={121}
+          stocked
+          inStock
+          isBuying={{}}
+          searchTerm=''
+          onGetDetails={callback}
+        />
+      )
+      wrapper.find('tr').simulate('click')
+    })
+
+    it('properly calls upstream callback', () => {
+      expect(callback.mock.calls).toEqual([[]])
+    })
+  })
+
   describe('handleOnIsBuying', () => {
     it('properly calls upstream callback', () => {
       const callback = jest.fn()
@@ -75,6 +100,23 @@ describe('ProductRow', () => {
   })
 
   describe('render', () => {
+    it('creates the correct id in each row', () => {
+      const wrapper = shallow(
+        <ProductRow
+          currentCategory='electronics'
+          category='electronics'
+          name='iphone 6'
+          price={121}
+          stocked
+          inStock
+          isBuying={{}}
+          searchTerm=''
+        />
+      )
+      const expected = 'electronics-iphone-6-row'
+      expect(wrapper.find('tr').node.props.id).toEqual(expected)
+    })
+
     it('performs basic callback functionality', () => {
       const callback = jest.fn()
       const wrapper = shallow(

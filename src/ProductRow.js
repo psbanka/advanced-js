@@ -2,12 +2,14 @@ import React, {Component} from 'react'
 import {Button} from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import {makeKey} from './utils'
+import {withRouter} from 'react-router-dom'
 
-export default class ProductRow extends Component {
+class ProductRow extends Component {
   constructor (props) {
     super(props)
     this.handleOnIsBuying = this.handleOnIsBuying.bind(this)
     this.handlePriceEdit = this.handlePriceEdit.bind(this)
+    this.onGetDetails = this.onGetDetails.bind(this)
   }
 
   makeMyKey () {
@@ -60,6 +62,11 @@ export default class ProductRow extends Component {
     )
   }
 
+  onGetDetails () {
+    const href = `/product/${this.makeMyKey()}`
+    this.props.history.push(href)
+  }
+
   render () {
     const filterMatch = this.props.name.indexOf(this.props.searchTerm) !== -1
     let style = {color: 'black'}
@@ -68,11 +75,13 @@ export default class ProductRow extends Component {
     }
 
     const button = this.getButton()
+    const key = this.makeMyKey()
+    const id = `${key}-row`
 
     if (!this.props.inStock || this.props.stocked) {
       if (filterMatch) {
         return (
-          <tr className='product' style={style}>
+          <tr id={id} onClick={this.onGetDetails} className='product' style={style}>
             <td style={{width: '100px'}}>
               {button}
             </td>
@@ -100,5 +109,8 @@ ProductRow.propTypes = {
   isBuying: PropTypes.object,
   onIsBuying: PropTypes.func,
   onPriceEdit: PropTypes.func,
-  isEditing: PropTypes.bool
+  isEditing: PropTypes.bool,
+  history: PropTypes.object.isRequired
 }
+
+export default withRouter(ProductRow)

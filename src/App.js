@@ -1,9 +1,11 @@
 import {Alert, PageHeader, Panel, Well, Col, Grid} from 'react-bootstrap'
 import React, {Component} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css'
 import SearchBox from './SearchBox'
 import ProductLine from './ProductLine'
 import ButtonBar from './ButtonBar'
+import Details from './Details'
 import {makeKey} from './utils'
 
 /* global fetch */
@@ -169,39 +171,47 @@ class App extends Component {
       )
     }
     return (
-      <Grid>
-        <Col xs={12} md={8}>
+      <Router>
+        <Grid>
           <Panel footer='&copy;2017 SuperGoods International, LLC'>
-            {messageBox}
             <PageHeader>
               Welcome SuperGoods <small>We have lots of stuff!</small>
             </PageHeader>
-            <SearchBox
-              searchTerm={this.state.searchTerm}
-              inStock={this.state.inStock}
-              onFilterTextInput={this.onFilterTextInput}
-              onFilterCheckBoxInput={this.onFilterCheckBoxInput}
-            />
-            <ProductLine
-              catalog={this.state.isEditing ? this.state.editingCatalog : this.state.catalog}
-              searchTerm={this.state.searchTerm}
-              inStock={this.state.inStock}
-              isBuying={this.state.isBuying}
-              onIsBuying={this.onIsBuying}
-              isEditing={this.state.isEditing}
-              onPriceEdit={this.onPriceEdit}
-            />
-            <Well>
-              <p id='total-box'>Total: ${this.state.total}</p>
-            </Well>
-            <ButtonBar
-              onEditToggle={this.onEditToggle}
-              onSave={this.onSave}
-              isEditing={this.state.isEditing}
-            />
+            <Col xs={12} md={8}>
+              {messageBox}
+              <SearchBox
+                searchTerm={this.state.searchTerm}
+                inStock={this.state.inStock}
+                onFilterTextInput={this.onFilterTextInput}
+                onFilterCheckBoxInput={this.onFilterCheckBoxInput}
+              />
+              <ProductLine
+                catalog={this.state.isEditing ? this.state.editingCatalog : this.state.catalog}
+                searchTerm={this.state.searchTerm}
+                inStock={this.state.inStock}
+                isBuying={this.state.isBuying}
+                onIsBuying={this.onIsBuying}
+                isEditing={this.state.isEditing}
+                onPriceEdit={this.onPriceEdit}
+              />
+              <Well>
+                <p id='total-box'>Total: ${this.state.total}</p>
+              </Well>
+              <ButtonBar
+                onEditToggle={this.onEditToggle}
+                onSave={this.onSave}
+                isEditing={this.state.isEditing}
+              />
+            </Col>
+            <Col xs={6} md={4}>
+              <Route
+                path='/product/:id'
+                component={(props) => (<Details {...props} catalog={this.state.catalog} />)}
+              />
+            </Col>
           </Panel>
-        </Col>
-      </Grid>
+        </Grid>
+      </Router>
     )
   }
 }
