@@ -233,6 +233,13 @@ scripts: {
 npm install --save-dev eslint-config-standard eslint-config-standard-react eslint-plugin-promise eslint-plugin-react eslint-plugin-standard eslint-plugin-node eslint
 ```
 
+- create an `.eslintrc` file in the root of your project with this content in it:
+```json
+{
+  "extends": ["standard", "standard-react"]
+}
+```
+
 - Have eslint fix all the "obvious" errors in your project with `./node_modules/.bin/eslint src --fix`
 - Update your `package.json` file to have eslint run as part of the test:
 ```javascript
