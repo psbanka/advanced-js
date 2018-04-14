@@ -1,6 +1,8 @@
 exports[`ProductRow does a snapshot check 1`] = `
 <tr
   className="product"
+  id="electronics-iphone-6-row"
+  onClick={undefined}
   style={
     Object {
       "color": "black",
